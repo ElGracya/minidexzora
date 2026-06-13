@@ -963,7 +963,13 @@ function renderTable(coinsList){
       <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${i+1}</div>
       <div class="coin-cell">
         <div class="coin-avatar">
-          ${c.image ? `<img src="${c.image}" alt="${c.symbol || 'TOKEN'}" loading="lazy" onerror="this.style.display='none'; this.parentElement.textContent='${(c.symbol || '?').slice(0,1).toUpperCase()}';">` : `${(c.symbol || '?').slice(0,1).toUpperCase()}`}
+          <img
+            src="${c.image || '/mini-zora-logo.jpg'}"
+            alt="${c.symbol || 'TOKEN'}"
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            onerror="this.onerror=null;this.src='/mini-zora-logo.jpg';"
+          >
         </div>
         <div>
           <div class="coin-info-title">${c.name}</div>

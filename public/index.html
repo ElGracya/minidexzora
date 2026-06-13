@@ -3,19 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><svg width="36" height="36" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 8px;">
-<rect width="16" height="16" rx="4" fill="#0052FF"/>
-<path d="M4 4H12V6H4V4Z" fill="white"/>
-<path d="M4 7H10V9H4V7Z" fill="white"/>
-<path d="M4 10H12V12H4V10Z" fill="white"/>
-<rect x="11" y="7" width="2" height="2" fill="#00D853"/>
-</svg><svg width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 8px; display: inline-block;">
-<rect width="16" height="16" rx="4" fill="#0052FF"/>
-<path d="M4 4H12V6H4V4Z" fill="white"/>
-<path d="M4 7H10V9H4V7Z" fill="white"/>
-<path d="M4 10H12V12H4V10Z" fill="white"/>
-<rect x="11" y="7" width="2" height="2" fill="#00D853"/>
-</svg>Mini Dex</title>
+<title><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/APgvaeFTAAAAr0lEQVR42u3RAREAAAgDoK1/aYvwwYIESNrsZgYgAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACADiDgY40wGg2gZ9VwAAAABJRU5ErkJggg==" alt="Logo" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 8px; display: inline-block;">Mini Dex</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js" type="text/javascript"></script>
 <style>
   :root{
@@ -707,19 +695,7 @@ img[src="/logo.png"] {
 
 
 
-    <div class="logo-text"><svg width="36" height="36" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 8px;">
-<rect width="16" height="16" rx="4" fill="#0052FF"/>
-<path d="M4 4H12V6H4V4Z" fill="white"/>
-<path d="M4 7H10V9H4V7Z" fill="white"/>
-<path d="M4 10H12V12H4V10Z" fill="white"/>
-<rect x="11" y="7" width="2" height="2" fill="#00D853"/>
-</svg><svg width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 8px; display: inline-block;">
-<rect width="16" height="16" rx="4" fill="#0052FF"/>
-<path d="M4 4H12V6H4V4Z" fill="white"/>
-<path d="M4 7H10V9H4V7Z" fill="white"/>
-<path d="M4 10H12V12H4V10Z" fill="white"/>
-<rect x="11" y="7" width="2" height="2" fill="#00D853"/>
-</svg>Mini Dex</div>
+    <div class="logo-text"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/APgvaeFTAAAAr0lEQVR42u3RAREAAAgDoK1/aYvwwYIESNrsZgYgAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACADiDgY40wGg2gZ9VwAAAABJRU5ErkJggg==" alt="Logo" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 8px; display: inline-block;">Mini Dex</div>
   </div>
 
   <div class="search-wrapper">
@@ -976,7 +952,7 @@ function renderTable(coinsList){
       <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${i+1}</div>
       <div class="coin-cell">
         <div class="coin-avatar">
-          <img src="${c.image}" alt="${c.symbol}" onerror="this.src='https://cloudflare-ipfs.com/ipfs/bafybeif3obmqw7n323q6b42bby7f776sctbe3bbyvsk6msbyvsk6msbyvs'">
+          
         </div>
         <div>
           <div class="coin-info-title">${c.name}</div>
@@ -1007,7 +983,7 @@ function openTokenDetailPage(address) {
   document.getElementById("modalCoinAddress").textContent = token.address.slice(0,10) + "..." + token.address.slice(-8);
   document.getElementById("modalCoinSupply").textContent = token.supply;
   document.getElementById("modalCoinCreator").textContent = token.creator.slice(0,6) + "..." + token.creator.slice(-4);
-  document.getElementById("modalCoinAvatar").innerHTML = `<img src="${token.image}" style="width:100%; height:100%; object-fit:cover;" onerror="this.src='https://cloudflare-ipfs.com/ipfs/bafybeif3obmqw7n323q6b42bby7f776sctbe3bbyvsk6msbyvsk6msbyvs'">`;
+  document.getElementById("modalCoinAvatar").innerHTML = ``;
   
   document.getElementById("chatMessagesBox").innerHTML = `
     <div class="chat-msg-item"><div class="chat-msg-user">system</div>Welcome to the $${token.symbol} chat profile. Keep it civil!</div>
@@ -1263,12 +1239,7 @@ background:#fff;
         font-weight:800;
         letter-spacing:-0.03em;
       ">
-        <svg width="24" height="24" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 6px;">
-<rect width="16" height="16" rx="4" fill="#0052FF"/>
-<path d="M4 4H12V6H4V4Z" fill="white"/>
-<path d="M4 7H10V9H4V7Z" fill="white"/>
-<path d="M4 10H12V12H4V10Z" fill="white"/>
-</svg>MINI DEX
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/APgvaeFTAAAAr0lEQVR42u3RAREAAAgDoK1/aYvwwYIESNrsZgYgAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACADiDgY40wGg2gZ9VwAAAABJRU5ErkJggg==" alt="MINI DEX" style="width: 24px; height: 24px; object-fit: contain; vertical-align: middle; margin-right: 6px; display: inline-block;">MINI DEX
       </div>
     </div>
 
@@ -1308,19 +1279,7 @@ background:#fff;
     color:#999;
     font-size:11px;
   ">
-    © 2026 <svg width="36" height="36" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 8px;">
-<rect width="16" height="16" rx="4" fill="#0052FF"/>
-<path d="M4 4H12V6H4V4Z" fill="white"/>
-<path d="M4 7H10V9H4V7Z" fill="white"/>
-<path d="M4 10H12V12H4V10Z" fill="white"/>
-<rect x="11" y="7" width="2" height="2" fill="#00D853"/>
-</svg><svg width="32" height="32" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="vertical-align: middle; margin-right: 8px; display: inline-block;">
-<rect width="16" height="16" rx="4" fill="#0052FF"/>
-<path d="M4 4H12V6H4V4Z" fill="white"/>
-<path d="M4 7H10V9H4V7Z" fill="white"/>
-<path d="M4 10H12V12H4V10Z" fill="white"/>
-<rect x="11" y="7" width="2" height="2" fill="#00D853"/>
-</svg>Mini Dex
+    © 2026 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAABmJLR0QA/wD/APgvaeFTAAAAr0lEQVR42u3RAREAAAgDoK1/aYvwwYIESNrsZgYgAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACAAiAIgAIAKACADiDgY40wGg2gZ9VwAAAABJRU5ErkJggg==" alt="Logo" style="width: 32px; height: 32px; object-fit: contain; vertical-align: middle; margin-right: 8px; display: inline-block;">Mini Dex
   </div>
 
 </footer>

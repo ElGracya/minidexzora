@@ -1036,6 +1036,68 @@ body > .logo:last-of-type {
 }
 </style>
 
+
+<style id="minidex-live-skeleton-medal-v1">
+.skeleton {
+  background: linear-gradient(90deg, #eef2f7 25%, #f8fafc 50%, #eef2f7 75%);
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.25s ease-in-out infinite;
+  border-radius: 10px;
+}
+
+@keyframes skeletonPulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-row {
+  pointer-events: none !important;
+}
+
+.skeleton-rank {
+  width: 20px;
+  height: 18px;
+}
+
+.skeleton-title {
+  width: 150px;
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.skeleton-subtitle {
+  width: 90px;
+  height: 12px;
+}
+
+.skeleton-cap {
+  width: 64px;
+  height: 16px;
+}
+
+.skeleton-small {
+  width: 54px;
+  height: 16px;
+}
+
+.skeleton-button {
+  width: 54px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+#zoraLiveStatus {
+  user-select: none;
+}
+
+@media screen and (max-width: 768px) {
+  #zoraLiveStatus {
+    margin: 0 0 12px 4px !important;
+    font-size: 12px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1099,7 +1161,12 @@ body > .logo:last-of-type {
       <div>Holders</div>
       <div style="text-align: right; padding-right: 28px;">Action</div>
     </div>
-    <div id="coinTable"></div>
+    <div id="zoraLiveStatus" style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#16a34a;margin:0 0 12px 2px;">
+  <span style="width:7px;height:7px;border-radius:999px;background:#16a34a;display:inline-block;"></span>
+  LIVE Zora data
+</div>
+
+<div id="coinTable"></div>
   </div>
 </main>
 
@@ -1274,10 +1341,15 @@ function switchFilter(type) {
 
 async function fetchCoins(){
   try{
+    renderSkeletonLoading();
+    updateLiveStatus("syncing");
     const res = await fetch(`${API_BASE}/api/tokens?filter=${activeFilter}`);
     masterCoinsList = await res.json();
     renderTable(masterCoinsList);
-  }catch(err){}
+    updateLiveStatus("live");
+  }catch(err){
+    updateLiveStatus("offline");
+  }
 }
 
 function handleLiveSearch() {
@@ -1303,7 +1375,7 @@ function renderTable(coinsList){
 
     return `
     <div class="t-row" data-rank="${i+1}" onclick="openTokenDetailPage('${c.address}')">
-      <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${i+1}</div>
+      <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${getRankDisplay(i)}</div>
       <div class="coin-cell">
         <div class="coin-avatar">
           <img
@@ -1333,6 +1405,53 @@ function renderTable(coinsList){
     </div>`;
   }).join("");
 }
+
+
+function getRankDisplay(i) {
+  if (i === 0) return "🥇";
+  if (i === 1) return "🥈";
+  if (i === 2) return "🥉";
+  return i + 1;
+}
+
+function renderSkeletonLoading() {
+  const wrap = document.getElementById("coinTable");
+  if (!wrap) return;
+
+  wrap.innerHTML = Array.from({ length: 6 }).map(() => `
+    <div class="t-row skeleton-row">
+      <div class="skeleton skeleton-rank"></div>
+      <div class="coin-cell">
+        <div class="coin-avatar skeleton"></div>
+        <div style="width:100%;">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-subtitle"></div>
+        </div>
+      </div>
+      <div class="skeleton skeleton-cap"></div>
+      <div class="skeleton skeleton-small"></div>
+      <div class="skeleton skeleton-small"></div>
+      <div class="skeleton skeleton-button"></div>
+    </div>
+  `).join("");
+}
+
+function updateLiveStatus(state) {
+  const el = document.getElementById("zoraLiveStatus");
+  if (!el) return;
+
+  if (state === "syncing") {
+    el.innerHTML = '<span style="width:7px;height:7px;border-radius:999px;background:#f59e0b;display:inline-block;"></span> Syncing Zora data...';
+    el.style.color = "#b45309";
+  } else if (state === "offline") {
+    el.innerHTML = '<span style="width:7px;height:7px;border-radius:999px;background:#ef4444;display:inline-block;"></span> Zora data delayed';
+    el.style.color = "#dc2626";
+  } else {
+    el.innerHTML = '<span style="width:7px;height:7px;border-radius:999px;background:#16a34a;display:inline-block;"></span> LIVE Zora data';
+    el.style.color = "#16a34a";
+  }
+}
+
 
 function openTokenDetailPage(address) {
   const token = masterCoinsList.find(c => c.address === address);

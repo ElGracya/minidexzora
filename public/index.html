@@ -696,23 +696,7 @@ body > .logo:last-of-type {
 </head>
 <body>
 
-<div id="top-left-brand" style="
-  position:absolute;
-  top:124px;
-  left:32px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  z-index:100;
-  font-weight:800;
-  font-size:18px;
-  color:#111;
-">
-  <img src="/mini-zora-logo.jpg?v=600"
-       alt="MINI DEX"
-       style="width:32px;height:32px;object-fit:contain;">
-  <span>MINI DEX</span>
-</div>
+
 
 
 
@@ -1284,6 +1268,36 @@ setInterval(() => {
 
 
 
+
+
+<script id="forceSearchBrandScript">
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll("#searchTopBrand").forEach(e => e.remove());
+
+  const brand = document.createElement("div");
+  brand.id = "searchTopBrand";
+  brand.innerHTML = `
+    <img src="/mini-zora-logo.jpg?v=700" style="width:32px;height:32px;object-fit:contain;display:block;">
+    <span>MINI DEX</span>
+  `;
+
+  brand.style.cssText = `
+    position:fixed;
+    top:118px;
+    left:32px;
+    z-index:999999999;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#111;
+    font-size:18px;
+    font-weight:800;
+    pointer-events:auto;
+  `;
+
+  document.body.appendChild(brand);
+});
+</script>
 
 </body>
 </html>

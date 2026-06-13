@@ -1098,6 +1098,30 @@ body > .logo:last-of-type {
 }
 </style>
 
+
+<style id="deploy-loading-ui-v1">
+.deploy-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,.45);
+  border-top-color: #fff;
+  border-radius: 999px;
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: 8px;
+  animation: deploySpin .75s linear infinite;
+}
+
+@keyframes deploySpin {
+  to { transform: rotate(360deg); }
+}
+
+#deployTokenBtn:disabled {
+  opacity: .92 !important;
+  cursor: wait !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -1536,11 +1560,11 @@ async function submitCreateTokenRealtime(){
   const description = document.getElementById("tokenDesc").value.trim();
   const deployBtn = document.getElementById("deployTokenBtn");
 
-  if(!name || !symbol) { showToast("⚠️ Name dan Symbol wajib diisi."); return; }
+  if(!name || !symbol) { showToast("⚠️ Token name and symbol are required."); return; }
 
   deployBtn.disabled = true;
-  deployBtn.textContent = "Deploying...";
-  showToast("🚀 Sedang deploy token ke Base via MiniDex...");
+  deployBtn.innerHTML = `<span class="deploy-spinner"></span> Deploying token...`;
+  showToast("🚀 Deploying token to Base via MiniDex... Please keep this page open.");
 
   try {
     const res = await fetch(`${API_BASE}/api/create-coin-call`, {
@@ -1555,7 +1579,7 @@ async function submitCreateTokenRealtime(){
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
+    if (!res.ok) throw new Error(data.error || "Failed to deploy token.");
 
     closeModal("createTokenModal");
 
@@ -1584,7 +1608,7 @@ async function submitCreateTokenRealtime(){
     console.error(err);
   } finally {
     deployBtn.disabled = false;
-    deployBtn.textContent = "Deploy via Wallet Contract";
+    deployBtn.innerHTML = "Deploy via Wallet Contract";
     deployBtn.style.opacity = "1";
   }
 }

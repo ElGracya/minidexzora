@@ -1594,3 +1594,50 @@ setInterval(() => {
 
 
 
+
+<style id="mobile-hide-desktop-table-row-final">
+@media screen and (max-width: 768px) {
+  /* Sembunyikan baris header tabel tepat sebelum list token */
+  #coinTable {
+    margin-top: 0 !important;
+  }
+
+  #coinTable.previousElementSibling {
+    display: none !important;
+  }
+
+  main > div:has(+ #coinTable),
+  main > section:has(+ #coinTable) {
+    display: none !important;
+  }
+
+  /* Fallback: sembunyikan grid header desktop yang berisi 6 kolom */
+  main div[style*="grid-template-columns"]:not(.t-row) {
+    display: none !important;
+  }
+}
+</style>
+
+<script id="mobile-hide-table-labels-js">
+document.addEventListener("DOMContentLoaded", function () {
+  function hideMobileTableHeader() {
+    if (window.innerWidth > 768) return;
+
+    const table = document.getElementById("coinTable");
+    if (!table) return;
+
+    const prev = table.previousElementSibling;
+    if (prev && !prev.classList.contains("t-row")) {
+      prev.style.display = "none";
+      prev.style.height = "0";
+      prev.style.overflow = "hidden";
+      prev.style.margin = "0";
+      prev.style.padding = "0";
+    }
+  }
+
+  hideMobileTableHeader();
+  setTimeout(hideMobileTableHeader, 500);
+  setTimeout(hideMobileTableHeader, 1500);
+});
+</script>

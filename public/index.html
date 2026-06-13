@@ -1354,24 +1354,5 @@ document.addEventListener("DOMContentLoaded", function () {
   `;
   topLogo.onclick = () => window.location.reload();
   document.body.appendChild(topLogo);
-
-  const footerLogo = document.createElement("div");
-  footerLogo.id = "forceFooterLogo";
-  footerLogo.innerHTML = `
-    <img src="/mini-zora-logo.jpg?v=99" style="width:24px;height:24px;object-fit:contain;margin-right:6px;vertical-align:middle;">
-    <span>MINI DEX</span>
-  `;
-  footerLogo.style.cssText = `
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:6px;
-    color:white;
-    font-weight:800;
-    font-size:14px;
-    margin:20px 0 8px 0;
-  `;
-  document.body.appendChild(footerLogo);
 });
 </script>

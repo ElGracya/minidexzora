@@ -1659,7 +1659,7 @@ function calculateLiveUsdPrice(ethValue) {
 async function executeBuyTransaction(contractAddress, tokenSymbol) {
   if (!userWalletAddress || !ethersSigner) { 
     openModal('walletModal'); 
-    showToast("⚠️ Silakan hubungkan dompet Web3 Anda terlebih dahulu!");
+    showToast("⚠️ Please connect your Web3 wallet first.");
     return; 
   }
   

@@ -794,11 +794,11 @@ body > .logo:last-of-type {
   .t-row {
     position: relative !important;
     display: grid !important;
-    grid-template-columns: 58px minmax(0, 1fr) auto !important;
+    grid-template-columns: 24px 58px minmax(0,1fr) auto !important;
     grid-template-rows: auto auto !important;
     grid-template-areas:
-      "avatar info buy"
-      "avatar metrics metrics" !important;
+      "rank avatar info buy"
+      "rank avatar metrics metrics" !important;
     align-items: start !important;
     column-gap: 12px !important;
     row-gap: 8px !important;
@@ -811,7 +811,15 @@ body > .logo:last-of-type {
   }
 
   .t-row > div:nth-child(1) {
-    display: none !important;
+    grid-area: rank !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    width: 24px !important;
+    margin-top: 4px !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    color: #9ca3af !important;
   }
 
   .t-row > div:nth-child(2) {

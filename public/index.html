@@ -1651,3 +1651,32 @@ setInterval(() => {
   }
 }
 </style>
+
+<style id="desktop-grid-action-final-fix">
+@media screen and (min-width: 769px) {
+  .mobile-token-meta {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .buy-column-wrapper {
+    grid-column: 6 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+
+  .t-row > div:nth-child(6) {
+    grid-column: 6 !important;
+    grid-row: 1 !important;
+  }
+
+  .t-row {
+    grid-template-columns: 40px 2.8fr 1.3fr 1.1fr 1.1fr 1.1fr !important;
+  }
+}
+</style>

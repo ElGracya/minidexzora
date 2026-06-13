@@ -1207,7 +1207,7 @@ function renderTable(coinsList){
     const finalMcap = typeof c.marketCap === "number" ? "$" + (c.marketCap / 1000).toFixed(0) + "k" : c.marketCap;
 
     return `
-    <div class="t-row" onclick="openTokenDetailPage('${c.address}')">
+    <div class="t-row" data-rank="${i+1}" onclick="openTokenDetailPage('${c.address}')">
       <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${i+1}</div>
       <div class="coin-cell">
         <div class="coin-avatar">
@@ -1519,3 +1519,29 @@ setInterval(() => {
 
 
 
+
+<style id="mobile-rank-badge-fix">
+@media screen and (max-width: 768px) {
+  .t-row {
+    padding-left: 42px !important;
+  }
+
+  .t-row::before {
+    content: attr(data-rank);
+    position: absolute;
+    left: 14px;
+    top: 18px;
+    width: 22px;
+    height: 22px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+  }
+}
+</style>

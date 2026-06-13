@@ -1685,9 +1685,7 @@ function showToast(msg){
 }
 
 fetchCoins();
-setInterval(() => {
-  if(!document.getElementById("tokenSearchInput").value.trim()) fetchCoins();
-}, 4000);
+setInterval(() => { if(!document.getElementById("tokenSearchInput").value.trim()) fetchCoins(); }, 30000);
 </script>
 
 

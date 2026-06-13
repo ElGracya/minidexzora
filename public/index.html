@@ -1267,3 +1267,66 @@ setInterval(() => {
 
 </body>
 </html>
+
+<style id="mobile-responsive-ui">
+@media (max-width: 768px) {
+  header {
+    flex-wrap: wrap !important;
+    padding: 14px 16px !important;
+    gap: 12px !important;
+  }
+
+  header .logo {
+    order: 1;
+    min-width: auto !important;
+  }
+
+  .header-right-box {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .search-wrapper {
+    order: 3;
+    width: 100% !important;
+  }
+
+  main {
+    padding: 0 12px 32px 12px !important;
+  }
+
+  .t-row {
+    grid-template-columns: 36px 1fr auto !important;
+    gap: 12px !important;
+    padding: 16px !important;
+    align-items: center !important;
+  }
+
+  .t-row > div:nth-child(3),
+  .t-row > div:nth-child(4),
+  .t-row > div:nth-child(5) {
+    display: none !important;
+  }
+
+  .coin-avatar {
+    width: 48px !important;
+    height: 48px !important;
+  }
+
+  .coin-info-title {
+    font-size: 15px !important;
+  }
+
+  .buy-column-wrapper {
+    display: block !important;
+  }
+
+  .btn-buy-elegant {
+    padding: 8px 14px !important;
+  }
+
+  footer {
+    padding: 22px 18px 20px !important;
+  }
+}
+</style>

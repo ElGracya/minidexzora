@@ -945,33 +945,47 @@ body > .logo:last-of-type {
 
 
 
-<style id="mobile-rank-force-visible">
+
+
+
+<style id="mobile-token-restore-rank">
 @media screen and (max-width: 768px) {
+  /* Jangan pernah sembunyikan list token */
+  #coinTable {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
   .t-row {
+    display: grid !important;
     position: relative !important;
     padding-left: 52px !important;
   }
 
+  /* sembunyikan rank asli desktop */
   .t-row > div:first-child {
     display: none !important;
   }
 
+  /* tampilkan rank mobile dari urutan realtime */
   .t-row::before {
     content: attr(data-rank) !important;
     position: absolute !important;
     left: 16px !important;
     top: 18px !important;
-    width: 24px !important;
-    height: 24px !important;
-    border-radius: 999px !important;
-    background: #f3f4f6 !important;
-    color: #374151 !important;
-    font-size: 12px !important;
+    color: #9ca3af !important;
+    font-size: 14px !important;
     font-weight: 900 !important;
-    line-height: 24px !important;
-    text-align: center !important;
-    z-index: 999 !important;
-    display: block !important;
+    z-index: 50 !important;
+  }
+
+  /* sembunyikan header tabel mobile saja */
+  .table-head,
+  .table-header,
+  .table-header-row,
+  .token-table-head {
+    display: none !important;
   }
 }
 </style>
@@ -1557,39 +1571,9 @@ setInterval(() => {
 
 
 
-<style id="mobile-hide-table-header">
-@media screen and (max-width: 768px) {
-  .table-head,
-  .table-header,
-  .t-head {
-    display: none !important;
-    height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    overflow: hidden !important;
-    border: 0 !important;
-  }
-}
-</style>
 
-<style id="mobile-force-hide-column-labels">
-@media screen and (max-width: 768px) {
-  main > div:nth-of-type(2),
-  main > div:nth-of-type(3),
-  .table-header-row,
-  .table-labels,
-  .token-table-head {
-    display: none !important;
-  }
 
-  div[style*="MARKET CAP"],
-  div[style*="TRADES"],
-  div[style*="HOLDERS"],
-  div[style*="ACTION"] {
-    display: none !important;
-  }
-}
-</style>
+
 
 
 

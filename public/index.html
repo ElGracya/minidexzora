@@ -1558,8 +1558,19 @@ async function submitCreateTokenRealtime(){
     if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
 
     closeModal("createTokenModal");
+
+    const contractAddress =
+      data.predictedCoinAddress ||
+      data.address ||
+      data.coinAddress ||
+      data.contractAddress ||
+      data.deployedAddress ||
+      "Address unavailable";
+
+    const cleanSymbol = symbol.toUpperCase();
+
     showToast(`🚀 $${cleanSymbol} has been successfully deployed.`);
-      showTokenSuccessModal(cleanSymbol, result.address || result.coinAddress || result.contractAddress);
+    showTokenSuccessModal(cleanSymbol, contractAddress);
 
     document.getElementById("tokenName").value = "";
     document.getElementById("tokenSymbol").value = "";

@@ -1680,3 +1680,64 @@ setInterval(() => {
   }
 }
 </style>
+
+<style id="minidex-ui-polish-v1">
+/* Desktop polish */
+@media screen and (min-width: 769px) {
+  .t-row {
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease !important;
+  }
+
+  .t-row:hover {
+    transform: translateY(-2px) !important;
+    border-color: rgba(0,82,255,.18) !important;
+    box-shadow: 0 10px 28px rgba(15,23,42,.06) !important;
+    background: #fff !important;
+  }
+
+  .t-row:hover .coin-avatar img {
+    transform: scale(1.06) !important;
+  }
+
+  .coin-avatar img {
+    transition: transform .2s ease !important;
+  }
+}
+
+/* Buttons polish */
+.btn,
+.btn-buy-elegant {
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease !important;
+}
+
+.btn:hover,
+.btn-buy-elegant:hover {
+  transform: translateY(-1px) !important;
+}
+
+.btn-buy-elegant:hover {
+  box-shadow: 0 8px 18px rgba(0,82,255,.12) !important;
+  border-color: rgba(0,82,255,.28) !important;
+}
+
+/* Mobile tap polish */
+@media screen and (max-width: 768px) {
+  .t-row {
+    transition: transform .14s ease, box-shadow .14s ease !important;
+  }
+
+  .t-row:active {
+    transform: scale(.985) !important;
+  }
+
+  .btn:active,
+  .btn-buy-elegant:active {
+    transform: scale(.97) !important;
+  }
+
+  .search-wrapper:focus-within {
+    border-color: rgba(0,82,255,.35) !important;
+    box-shadow: 0 0 0 4px rgba(0,82,255,.06) !important;
+  }
+}
+</style>

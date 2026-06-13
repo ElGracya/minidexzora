@@ -941,6 +941,37 @@ body > .logo:last-of-type {
 }
 </style>
 
+
+<style id="mobile-rank-badge-final">
+@media screen and (max-width: 768px) {
+  .t-row {
+    position: relative !important;
+    padding-left: 48px !important;
+  }
+
+  /* Sembunyikan rank asli desktop di mobile */
+  .t-row > div:first-child {
+    display: none !important;
+  }
+
+  /* Tampilkan rank mobile dari data-rank realtime */
+  .t-row::before {
+    content: attr(data-rank) !important;
+    position: absolute !important;
+    left: 16px !important;
+    top: 18px !important;
+    min-width: 20px !important;
+    height: 20px !important;
+    color: #9ca3af !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    line-height: 20px !important;
+    text-align: center !important;
+    z-index: 10 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1207,7 +1238,7 @@ function renderTable(coinsList){
     const finalMcap = typeof c.marketCap === "number" ? "$" + (c.marketCap / 1000).toFixed(0) + "k" : c.marketCap;
 
     return `
-    <div class="t-row" onclick="openTokenDetailPage('${c.address}')">
+    <div class="t-row" data-rank="${i+1}" onclick="openTokenDetailPage('${c.address}')">
       <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${i+1}</div>
       <div class="coin-cell">
         <div class="coin-avatar">
@@ -1559,16 +1590,4 @@ setInterval(() => {
 
 
 
-<style id="mobile-show-original-rank-final">
-@media screen and (max-width: 768px) {
-  .t-row > div:first-child {
-    display: flex !important;
-    align-items: flex-start !important;
-    justify-content: center !important;
-    color: #9ca3af !important;
-    font-size: 13px !important;
-    font-weight: 800 !important;
-    padding-top: 6px !important;
-  }
-}
-</style>
+

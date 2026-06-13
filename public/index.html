@@ -1280,6 +1280,36 @@ body > .logo:last-of-type {
   </div>
 </div>
 
+
+<div class="overlay" id="tokenSuccessModal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-head">
+      <h3>Token Successfully Created</h3>
+      <button class="close-x" onclick="closeModal('tokenSuccessModal')">✕</button>
+    </div>
+
+    <div style="font-size:14px;color:#555;line-height:1.6;margin:14px 0;">
+      <strong id="successTokenSymbol"></strong> has been successfully deployed on Base via MiniDex.
+    </div>
+
+    <div style="font-size:12px;color:#777;margin-bottom:8px;font-weight:700;text-transform:uppercase;">
+      Contract Address
+    </div>
+
+    <div id="successTokenAddress" style="font-size:12px;word-break:break-all;background:#f6f7f9;border:1px solid #e5e7eb;border-radius:10px;padding:10px;margin-bottom:16px;color:#333;"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <button class="btn btn-accent" onclick="window.open('https://zora.co/@minidex','_blank')">
+        Open Zora Profile
+      </button>
+      <button class="btn btn-success" id="openBaseScanBtn">
+        View on BaseScan
+      </button>
+    </div>
+  </div>
+</div>
+
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1528,7 +1558,8 @@ async function submitCreateTokenRealtime(){
     if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
 
     closeModal("createTokenModal");
-    showToast(`🚀 $${symbol} berhasil di-deploy! Address: ${data.predictedCoinAddress}`);
+    showToast(`🚀 $${cleanSymbol} has been successfully deployed.`);
+      showTokenSuccessModal(cleanSymbol, result.address || result.coinAddress || result.contractAddress);
 
     document.getElementById("tokenName").value = "";
     document.getElementById("tokenSymbol").value = "";
@@ -1679,6 +1710,19 @@ async function processFinalOnchainPurchase() {
 
 function openModal(id){ document.getElementById(id).classList.add("show"); }
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }
+
+function showTokenSuccessModal(symbol, address) {
+  document.getElementById("successTokenSymbol").textContent = "$" + symbol;
+  document.getElementById("successTokenAddress").textContent = address;
+
+  const btn = document.getElementById("openBaseScanBtn");
+  btn.onclick = function () {
+    window.open("https://basescan.org/address/" + address, "_blank");
+  };
+
+  openModal("tokenSuccessModal");
+}
+
 function showToast(msg){
   const t = document.getElementById("toast"); if(!t) return;
   t.textContent = msg; t.style.display = "block"; setTimeout(()=>t.style.display = "none", 4000);

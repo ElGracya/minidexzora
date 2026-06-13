@@ -1560,3 +1560,22 @@ setInterval(() => {
   }
 }
 </style>
+
+<style id="mobile-force-hide-column-labels">
+@media screen and (max-width: 768px) {
+  main > div:nth-of-type(2),
+  main > div:nth-of-type(3),
+  .table-header-row,
+  .table-labels,
+  .token-table-head {
+    display: none !important;
+  }
+
+  div[style*="MARKET CAP"],
+  div[style*="TRADES"],
+  div[style*="HOLDERS"],
+  div[style*="ACTION"] {
+    display: none !important;
+  }
+}
+</style>

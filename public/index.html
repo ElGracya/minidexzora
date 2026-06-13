@@ -1372,7 +1372,7 @@ async function ensureBaseNetwork() {
       throw switchError;
     }
   } catch (err) {
-    showToast("⚠️ Gagal switch ke jaringan Base. Silakan ganti manual di wallet Anda.");
+    showToast("⚠️ Failed to switch to Base network. Please switch manually in your wallet.");
     return false;
   }
 }
@@ -1698,7 +1698,7 @@ async function processFinalOnchainPurchase() {
   finalBuyBtn.textContent = "Broadcasting...";
 
   try {
-    // Memaksa wallet OKX / MetaMask beralih ke Base Network
+    // Force OKX / MetaMask wallet to switch to Base Network
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
@@ -1719,22 +1719,22 @@ async function processFinalOnchainPurchase() {
       }
     }
 
-    showToast(`🔵 Wallet Aktif: Konfirmasikan pembelian $${activeBuyTokenSymbol} sebesar ${ethInput} ETH...`);
+    showToast(`🔵 Wallet Connected: Please confirm your purchase of $${activeBuyTokenSymbol} for ${ethInput} ETH.`);
 
-    // Kirim transaksi pembelian sesuai total ETH yang diinput user ke Base blockchain
+    // Send purchase transaction with the ETH amount entered by the user to Base blockchain
     const tx = await ethersSigner.sendTransaction({
       to: activeBuyContractAddress,
       value: ethers.utils.parseEther(ethInput), // Menggunakan value dinamis sesuai ketikan user
       gasLimit: 95000
     });
 
-    showToast("⛓️ Transaksi disiarkan ke Base Blockchain! Menunggu konfirmasi block...");
+    showToast("⛓️ Transaction broadcast to Base. Waiting for block confirmation...");
     await tx.wait();
 
     closeModal("buyTokenModal");
-    showToast(`🎉 Sukses Membeli! ${ethInput} ETH dari token $${activeBuyTokenSymbol} telah masuk ke wallet Anda.`);
+    showToast(`🎉 Purchase successful! ${ethInput} ETH of $${activeBuyTokenSymbol} has been sent to your wallet.`);
   } catch (error) {
-    showToast("❌ Transaksi gagal atau dibatalkan dompet.");
+    showToast("❌ Transaction failed or was rejected by the wallet.");
     console.error(error);
   } finally {
     finalBuyBtn.disabled = false;

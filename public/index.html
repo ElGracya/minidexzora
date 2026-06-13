@@ -1341,8 +1341,9 @@ function switchFilter(type) {
 
 async function fetchCoins(){
   try{
-    renderSkeletonLoading();
-    updateLiveStatus("syncing");
+    const isFirstLoad = !masterCoinsList || masterCoinsList.length === 0;
+    if (isFirstLoad) renderSkeletonLoading();
+    if (isFirstLoad) updateLiveStatus("syncing");
     const res = await fetch(`${API_BASE}/api/tokens?filter=${activeFilter}`);
     masterCoinsList = await res.json();
     renderTable(masterCoinsList);

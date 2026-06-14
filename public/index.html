@@ -1324,26 +1324,13 @@ body > .logo:last-of-type {
 </style>
 
 
-
-
-
 <style id="walletconnect-zindex-fix">
 wcm-modal,
-wcm-modal *,
 wcm-modal-overlay,
 wcm-container,
+#walletconnect-wrapper,
 .walletconnect-modal__base,
-.walletconnect-modal__base *,
-.walletconnect-modal__mobile__toggle,
-.walletconnect-qrcode__base,
-.walletconnect-modal__footer {
-  z-index: 2147483647 !important;
-}
-
-body > wcm-modal,
-body > wcm-modal-overlay,
-body > wcm-container {
-  position: fixed !important;
+.walletconnect-modal__mobile__toggle {
   z-index: 2147483647 !important;
 }
 </style>
@@ -2082,9 +2069,6 @@ setInterval(() => { if(!document.getElementById("tokenSearchInput").value.trim()
 
 
 
-
-
-
 <script type="module" id="walletconnect-reown-v1">
 import EthereumProvider from "https://esm.sh/@walletconnect/ethereum-provider@2.23.9?bundle";
 
@@ -2109,9 +2093,7 @@ window.connectWalletConnect = async function () {
       }
     });
 
-    // Biarkan modal MiniDex tetap ada dulu. QR WalletConnect akan dipaksa di atas.
     const accounts = await wcProvider.enable();
-
     userWalletAddress = accounts[0];
 
     ethersProvider = new ethers.providers.Web3Provider(wcProvider);

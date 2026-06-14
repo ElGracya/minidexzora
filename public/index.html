@@ -2067,6 +2067,7 @@ function withTimeout(promise, ms, message) {
 
 window.connectWalletConnect = async function () {
   try {
+    closeModal("walletModal");
     showToast("Opening WalletConnect...");
 
     if (!WC_PROJECT_ID) {

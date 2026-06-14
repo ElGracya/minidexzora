@@ -2053,51 +2053,56 @@ setInterval(() => { if(!document.getElementById("tokenSearchInput").value.trim()
 
 
 
-<script type="module" id="walletconnect-reown-v1">
-import EthereumProvider from "https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.23.9/+esm";
 
+
+
+
+<script id="walletconnect-reown-v2">
 const WC_PROJECT_ID = "033e1bf768a0bedf09581cb8a3738d13";
 
-function withTimeout(promise, ms, message) {
-  return Promise.race([
-    promise,
-    new Promise((_, reject) => setTimeout(() => reject(new Error(message)), ms))
-  ]);
+async function loadWalletConnectProvider() {
+  const cdns = [
+    "https://cdn.jsdelivr.net/npm/@walletconnect/ethereum-provider@2.17.0/+esm",
+    "https://esm.sh/@walletconnect/ethereum-provider@2.17.0?bundle",
+    "https://unpkg.com/@walletconnect/ethereum-provider@2.17.0/dist/index.es.js"
+  ];
+
+  let lastError;
+  for (const url of cdns) {
+    try {
+      const mod = await import(url);
+      return mod.default || mod.EthereumProvider || mod;
+    } catch (err) {
+      lastError = err;
+      console.warn("WalletConnect CDN failed:", url, err);
+    }
+  }
+
+  throw lastError || new Error("Unable to load WalletConnect provider.");
 }
 
 window.connectWalletConnect = async function () {
   try {
     showToast("Opening WalletConnect...");
 
-    if (!WC_PROJECT_ID) {
-      throw new Error("WalletConnect Project ID is missing.");
-    }
+    const EthereumProvider = await loadWalletConnectProvider();
 
-    const wcProvider = await withTimeout(
-      EthereumProvider.init({
-        projectId: WC_PROJECT_ID,
-        chains: [8453],
-        rpcMap: {
-          8453: "https://mainnet.base.org"
-        },
-        showQrModal: true,
-        metadata: {
-          name: "MiniDex",
-          description: "Create and trade Zora tokens on Base.",
-          url: "https://minidexzora.xyz",
-          icons: ["https://minidexzora.xyz/mini-zora-logo.jpg"]
-        }
-      }),
-      15000,
-      "WalletConnect took too long to initialize."
-    );
+    const wcProvider = await EthereumProvider.init({
+      projectId: WC_PROJECT_ID,
+      chains: [8453],
+      rpcMap: {
+        8453: "https://mainnet.base.org"
+      },
+      showQrModal: true,
+      metadata: {
+        name: "MiniDex",
+        description: "Create and trade Zora tokens on Base.",
+        url: "https://minidexzora.xyz",
+        icons: ["https://minidexzora.xyz/mini-zora-logo.jpg"]
+      }
+    });
 
-    const accounts = await withTimeout(
-      wcProvider.enable(),
-      30000,
-      "WalletConnect connection timed out."
-    );
-
+    const accounts = await wcProvider.enable();
     userWalletAddress = accounts[0];
 
     ethersProvider = new ethers.providers.Web3Provider(wcProvider);
@@ -2115,11 +2120,10 @@ window.connectWalletConnect = async function () {
     fetchCoins();
   } catch (err) {
     console.error("WalletConnect error:", err);
-    showToast("❌ " + (err.message || "WalletConnect connection canceled."));
+    showToast("❌ WalletConnect failed to load. Check browser console.");
   }
 };
 </script>
-
 
 </body>
 </html>

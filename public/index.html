@@ -1533,14 +1533,17 @@ wcm-container,
 
 
 
-<style id="minidex-create-token-ui-v2">
+
+
+
+<style id="minidex-create-token-safe-ui-v3">
 #createTokenModal {
   backdrop-filter: blur(18px) !important;
   -webkit-backdrop-filter: blur(18px) !important;
   background: rgba(15, 23, 42, .34) !important;
 }
 
-.minidex-create-modal-v2 {
+#createTokenModal .modal {
   width: min(92vw, 520px) !important;
   max-width: 520px !important;
   padding: 30px !important;
@@ -1548,72 +1551,44 @@ wcm-container,
   background: #fff !important;
   border: 1px solid rgba(15,23,42,.08) !important;
   box-shadow: 0 28px 90px rgba(15,23,42,.18) !important;
-  position: relative !important;
 }
 
-.minidex-create-close {
-  position: absolute;
-  right: 22px;
-  top: 22px;
-  width: 34px;
-  height: 34px;
-  border: 0;
-  border-radius: 12px;
-  background: #f5f6f8;
-  color: #667085;
-  font-size: 16px;
-  cursor: pointer;
+#createTokenModal .modal-head {
+  margin-bottom: 24px !important;
+  border: 0 !important;
+  padding: 0 !important;
 }
 
-.minidex-create-head {
-  margin-bottom: 24px;
-  padding-right: 44px;
+#createTokenModal .modal-head h3 {
+  font-size: 30px !important;
+  line-height: 1.05 !important;
+  letter-spacing: -.055em !important;
+  font-weight: 900 !important;
+  color: #070b14 !important;
 }
 
-.minidex-create-head h3 {
-  margin: 0 0 8px;
-  color: #070b14;
-  font-size: 30px;
-  line-height: 1.05;
-  letter-spacing: -.055em;
-  font-weight: 900;
+#createTokenModal .close-x {
+  width: 34px !important;
+  height: 34px !important;
+  border-radius: 12px !important;
+  background: #f5f6f8 !important;
+  color: #667085 !important;
 }
 
-.minidex-create-head p {
-  margin: 0;
-  color: #667085;
-  font-size: 14.5px;
-  line-height: 1.5;
+#createTokenModal .form-group {
+  margin-bottom: 16px !important;
 }
 
-.minidex-create-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.minidex-create-form .form-group {
-  margin: 0 !important;
-}
-
-.minidex-create-form label {
-  display: block;
-  margin-bottom: 8px;
-  color: #101828;
-  font-size: 13.5px;
-  font-weight: 800;
-  letter-spacing: -.01em;
+#createTokenModal .form-group label {
   text-transform: none !important;
+  font-size: 13.5px !important;
+  font-weight: 800 !important;
+  color: #101828 !important;
+  margin-bottom: 8px !important;
 }
 
-.minidex-create-form label span {
-  color: #98a2b3;
-  font-weight: 650;
-}
-
-.minidex-create-form input,
-.minidex-create-form textarea {
-  width: 100%;
+#createTokenModal input,
+#createTokenModal textarea {
   border-radius: 16px !important;
   border: 1px solid #edf0f3 !important;
   background: #fbfcfe !important;
@@ -1621,63 +1596,40 @@ wcm-container,
   font-size: 15px !important;
   padding: 14px 16px !important;
   outline: none !important;
-  box-shadow: none !important;
-  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
 }
 
-.minidex-create-form textarea {
-  min-height: 96px !important;
-  resize: vertical;
-}
-
-.minidex-create-form input:focus,
-.minidex-create-form textarea:focus {
+#createTokenModal input:focus,
+#createTokenModal textarea:focus {
   border-color: rgba(0,82,255,.32) !important;
   background: #fff !important;
   box-shadow: 0 0 0 4px rgba(0,82,255,.06) !important;
 }
 
-.minidex-upload-box {
+#createTokenModal .file-input-wrapper {
   min-height: 92px !important;
-  margin: 0 !important;
   border-radius: 18px !important;
   border: 1px dashed rgba(0,82,255,.28) !important;
   background: linear-gradient(180deg, #fbfdff, #f8faff) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  cursor: pointer;
-  transition: border-color .16s ease, background .16s ease, transform .16s ease;
+  text-align: center !important;
+  cursor: pointer !important;
 }
 
-.minidex-upload-box:hover {
-  transform: translateY(-1px);
-  border-color: rgba(0,82,255,.48) !important;
-  background: #f7faff !important;
+#createTokenModal #fileStatusText {
+  color: #101828 !important;
+  font-size: 14.5px !important;
+  font-weight: 850 !important;
 }
 
-.minidex-upload-box #fileStatusText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  color: #101828;
-  text-align: center;
+#createTokenModal #fileStatusText small {
+  color: #667085 !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
 }
 
-.minidex-upload-box #fileStatusText strong {
-  font-size: 14.5px;
-  font-weight: 850;
-}
-
-.minidex-upload-box #fileStatusText small {
-  color: #667085;
-  font-size: 12.5px;
-  font-weight: 600;
-}
-
-.minidex-create-submit {
-  width: 100% !important;
+#createTokenModal #deployTokenBtn {
   height: 56px !important;
   margin-top: 4px !important;
   border: 0 !important;
@@ -1686,26 +1638,7 @@ wcm-container,
   color: #fff !important;
   font-size: 16px !important;
   font-weight: 850 !important;
-  letter-spacing: -.02em;
   box-shadow: 0 12px 28px rgba(0,82,255,.18) !important;
-  transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
-}
-
-.minidex-create-submit:hover {
-  transform: translateY(-1px);
-  background: #0047df !important;
-  box-shadow: 0 16px 36px rgba(0,82,255,.22) !important;
-}
-
-@media screen and (max-width: 520px) {
-  .minidex-create-modal-v2 {
-    padding: 24px !important;
-    border-radius: 24px !important;
-  }
-
-  .minidex-create-head h3 {
-    font-size: 27px;
-  }
 }
 </style>
 
@@ -1820,52 +1753,46 @@ wcm-container,
 
 
 <div class="overlay" id="createTokenModal">
-  <div class="modal minidex-create-modal-v2">
-    <button class="minidex-create-close" onclick="closeModal('createTokenModal')" aria-label="Close">✕</button>
-
-    <div class="minidex-create-head">
-      <div>
-        <h3>Create token</h3>
-        <p>Launch a token on Base using MiniDex.</p>
-      </div>
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Create New Token</h3>
+      <button class="close-x" onclick="closeModal('createTokenModal')">✕</button>
     </div>
 
-    <div class="minidex-create-form">
-      <div class="form-group">
-        <label>Token name</label>
-        <input type="text" id="tokenName" placeholder="e.g., Internet Culture">
-      </div>
-
-      <div class="form-group">
-        <label>Token symbol</label>
-        <input type="text" id="tokenSymbol" placeholder="e.g., CULT">
-      </div>
-
-      <div class="form-group">
-        <label>Description <span>optional</span></label>
-        <textarea id="tokenDesc" rows="3" placeholder="Tell people what your token is about..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label>Token image</label>
-        <label class="file-input-wrapper minidex-upload-box">
-          <span id="fileStatusText">
-            <strong>Add token image</strong>
-            <small>PNG or JPG recommended</small>
-          </span>
-          <input type="file" id="tokenImageFile" accept="image/*" style="display:none;" onchange="processImageUpload(this)">
-        </label>
-      </div>
-
-      <div class="form-group">
-        <label>Initial supply</label>
-        <input type="number" id="tokenSupply" value="1000000000">
-      </div>
-
-      <button id="deployTokenBtn" type="button" class="btn minidex-create-submit" onclick="submitCreateTokenRealtime()">
-        Create Token
-      </button>
+    <div class="form-group">
+      <label>Token Name</label>
+      <input type="text" id="tokenName" placeholder="e.g., Internet Culture">
     </div>
+
+    <div class="form-group">
+      <label>Token Symbol</label>
+      <input type="text" id="tokenSymbol" placeholder="e.g., CULT">
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="tokenDesc" rows="2" placeholder="Project details..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Token Image Avatar</label>
+      <label class="file-input-wrapper">
+        <span id="fileStatusText">Add token image<br><small>PNG or JPG recommended</small></span>
+        <input type="file" id="tokenImageFile" accept="image/*" style="display:none;" onchange="processImageUpload(this)">
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label>Initial Supply</label>
+      <input type="number" id="tokenSupply" value="1000000000">
+    </div>
+
+    <button id="deployTokenBtn"
+      class="btn"
+      style="width:100%; padding:12px; border-radius:12px; background:var(--blue-accent); color:#fff; font-weight:700;"
+      onclick="submitCreateTokenRealtime()">
+      Create Token
+    </button>
   </div>
 </div>
 
@@ -2532,17 +2459,7 @@ window.connectWalletConnect = async function () {
 </script>
 
 
-<script id="create-token-button-fallback-fix">
-document.addEventListener("DOMContentLoaded", function () {
-  const btn = document.getElementById("deployTokenBtn");
-  if (btn && typeof submitCreateTokenRealtime === "function") {
-    btn.onclick = function(e) {
-      e.preventDefault();
-      submitCreateTokenRealtime();
-    };
-  }
-});
-</script>
+
 
 </body>
 </html>

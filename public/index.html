@@ -1327,23 +1327,23 @@ body > .logo:last-of-type {
 
 
 
+
+
+
 <style id="walletconnect-zindex-fix">
+#walletConnectOptionBtn {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  opacity: 1 !important;
+}
+
 wcm-modal,
 wcm-modal *,
 wcm-modal-overlay,
 wcm-container,
 .walletconnect-modal__base,
 .walletconnect-modal__base *,
-.walletconnect-modal__mobile__toggle,
-.walletconnect-qrcode__base,
-.walletconnect-modal__footer {
-  z-index: 2147483647 !important;
-}
-
-body > wcm-modal,
-body > wcm-modal-overlay,
-body > wcm-container {
-  position: fixed !important;
+.walletconnect-qrcode__base {
   z-index: 2147483647 !important;
 }
 </style>
@@ -2085,14 +2085,18 @@ setInterval(() => { if(!document.getElementById("tokenSearchInput").value.trim()
 
 
 
-<script type="module" id="walletconnect-reown-v1">
-import EthereumProvider from "https://esm.sh/@walletconnect/ethereum-provider@2.23.9?bundle";
 
+
+
+<script id="walletconnect-click-controller-v3">
 const WC_PROJECT_ID = "033e1bf768a0bedf09581cb8a3738d13";
 
-window.connectWalletConnect = async function () {
+async function startWalletConnectMiniDex() {
   try {
     showToast("Opening WalletConnect...");
+
+    const mod = await import("https://esm.sh/@walletconnect/ethereum-provider@2.23.9?bundle");
+    const EthereumProvider = mod.default;
 
     const wcProvider = await EthereumProvider.init({
       projectId: WC_PROJECT_ID,
@@ -2109,9 +2113,7 @@ window.connectWalletConnect = async function () {
       }
     });
 
-    // Biarkan modal MiniDex tetap ada dulu. QR WalletConnect akan dipaksa di atas.
     const accounts = await wcProvider.enable();
-
     userWalletAddress = accounts[0];
 
     ethersProvider = new ethers.providers.Web3Provider(wcProvider);
@@ -2131,7 +2133,39 @@ window.connectWalletConnect = async function () {
     console.error("WalletConnect error:", err);
     showToast("❌ " + (err.message || "WalletConnect connection canceled."));
   }
-};
+}
+
+window.connectWalletConnect = startWalletConnectMiniDex;
+
+function bindWalletConnectButton() {
+  const wcIcon = document.querySelector(".wallet-wc");
+  if (!wcIcon) return;
+
+  const btn = wcIcon.closest("button");
+  if (!btn) return;
+
+  btn.id = "walletConnectOptionBtn";
+  btn.classList.remove("disabled-option");
+  btn.removeAttribute("disabled");
+  btn.type = "button";
+  btn.onclick = null;
+
+  const small = btn.querySelector("small");
+  if (small) small.textContent = "Connect Trust Wallet, Rainbow, Rabby, and more";
+
+  if (!btn.dataset.wcBound) {
+    btn.dataset.wcBound = "true";
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      startWalletConnectMiniDex();
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", bindWalletConnectButton);
+setTimeout(bindWalletConnectButton, 500);
+setTimeout(bindWalletConnectButton, 1500);
 </script>
 
 </body>

@@ -1,7 +1,12 @@
 node_modules/
 .env
+.env.*
+!.env.example
 .DS_Store
-*.png
-Screenshot*
 *.backup
+*.backup-*
+*.bak
 *.bak*
+public/*.backup-*
+server.DATA001.js
+server.js.backup-*

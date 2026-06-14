@@ -178,20 +178,12 @@ app.post("/api/create-coin-call", async (req, res) => {
 
     console.log(`📡 Membangun metadata + on-chain call untuk $${cleanSymbol} | deployer wallet: ${deployerAccount.address}`);
 
-    const metadataId = `${Date.now()}-${cleanSymbol.toLowerCase()}`;
-    const metadata = {
-      name,
-      symbol: cleanSymbol,
-      description: description || "",
-      image: "https://minidexzora.xyz/mini-zora-logo.jpg"
-    };
-
-    miniDexMetadataStore.set(metadataId, metadata);
-
-    const publicBaseUrl = process.env.PUBLIC_BASE_URL || "https://minidexzora.xyz";
-    const createMetadataParameters = {
-      uri: `${publicBaseUrl}/api/metadata/${metadataId}`
-    };
+    const { createMetadataParameters } = await createMetadataBuilder()
+      .withName(name)
+      .withSymbol(cleanSymbol)
+      .withDescription(description || "")
+      .withImage(imageFile)
+      .upload(createZoraUploaderForCreator(deployerAccount.address));
 
     const result = await createCoinCall({
       creator: deployerAccount.address,

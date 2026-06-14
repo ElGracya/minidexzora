@@ -2702,7 +2702,17 @@ window.connectWalletConnect = async function () {
   </div>
 </div>
 
-</body>
+
+<script id="minidex-clean-body-text-node">
+document.addEventListener("DOMContentLoaded", function () {
+  Array.from(document.body.childNodes).forEach(function (node) {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
+      node.remove();
+    }
+  });
+});
+</script>
+\n</body>
 </html>
 
 

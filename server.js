@@ -21,7 +21,6 @@ const cors = require("cors");
 const fetch = require("node-fetch");
 
 const app = express();
-const miniDexMetadataStore = new Map();
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.static("public"));
@@ -141,14 +140,6 @@ app.post("/api/buy-coin-call", async (req, res) => {
   }
 });
 
-
-
-app.get("/api/metadata/:id", (req, res) => {
-  const metadata = miniDexMetadataStore.get(req.params.id);
-  if (!metadata) return res.status(404).json({ error: "Metadata not found" });
-  res.setHeader("Content-Type", "application/json");
-  return res.json(metadata);
-});
 
 app.post("/api/create-coin-call", async (req, res) => {
   try {

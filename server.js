@@ -169,12 +169,31 @@ app.post("/api/create-coin-call", async (req, res) => {
 
     console.log(`📡 Membangun metadata + on-chain call untuk $${cleanSymbol} | deployer wallet: ${deployerAccount.address}`);
 
-    const { createMetadataParameters } = await createMetadataBuilder()
-      .withName(name)
-      .withSymbol(cleanSymbol)
-      .withDescription(description || "")
-      .withImage(imageFile)
-      .upload(createZoraUploaderForCreator(deployerAccount.address));
+    let createMetadataParameters;
+
+    try {
+      const uploaded = await createMetadataBuilder()
+        .withName(name)
+        .withSymbol(cleanSymbol)
+        .withDescription(description || "")
+        .withImage(imageFile)
+        .upload(createZoraUploaderForCreator(deployerAccount.address));
+
+      createMetadataParameters = uploaded.createMetadataParameters;
+    } catch (uploadErr) {
+      console.warn("⚠️ Zora image upload failed, retrying without uploaded image:", uploadErr.message || uploadErr);
+
+      const fallbackImageFile = new File([Buffer.from("")], "token.png", { type: "image/png" });
+
+      const uploadedFallback = await createMetadataBuilder()
+        .withName(name)
+        .withSymbol(cleanSymbol)
+        .withDescription(description || "")
+        .withImage(fallbackImageFile)
+        .upload(createZoraUploaderForCreator(deployerAccount.address));
+
+      createMetadataParameters = uploadedFallback.createMetadataParameters;
+    }
 
     const result = await createCoinCall({
       creator: deployerAccount.address,

@@ -2461,6 +2461,56 @@ window.connectWalletConnect = async function () {
 
 
 
+
+<script id="minidex-create-token-click-fix">
+(function () {
+  function bindCreateTokenButton() {
+    const btn = document.getElementById("deployTokenBtn");
+    if (!btn) return;
+
+    btn.setAttribute("type", "button");
+
+    btn.onclick = function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (typeof window.submitCreateTokenRealtime === "function") {
+        window.submitCreateTokenRealtime();
+      } else if (typeof submitCreateTokenRealtime === "function") {
+        submitCreateTokenRealtime();
+      } else {
+        console.error("submitCreateTokenRealtime function not found");
+        if (typeof showToast === "function") {
+          showToast("❌ Create Token function not found.");
+        }
+      }
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded", bindCreateTokenButton);
+  window.addEventListener("load", bindCreateTokenButton);
+
+  document.addEventListener("click", function (e) {
+    const btn = e.target.closest && e.target.closest("#deployTokenBtn");
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (typeof window.submitCreateTokenRealtime === "function") {
+      window.submitCreateTokenRealtime();
+    } else if (typeof submitCreateTokenRealtime === "function") {
+      submitCreateTokenRealtime();
+    } else {
+      console.error("submitCreateTokenRealtime function not found");
+      if (typeof showToast === "function") {
+        showToast("❌ Create Token function not found.");
+      }
+    }
+  }, true);
+})();
+</script>
+
 </body>
 </html>
 

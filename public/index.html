@@ -1323,6 +1323,19 @@ body > .logo:last-of-type {
 }
 </style>
 
+
+<style id="walletconnect-overlay-priority-fix">
+wcm-modal,
+wcm-modal *,
+wcm-modal-overlay,
+wcm-container,
+.walletconnect-modal__base,
+.walletconnect-modal__base *,
+.walletconnect-qrcode__base {
+  z-index: 2147483647 !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -2084,6 +2097,15 @@ async function loadWalletConnectProvider() {
 window.connectWalletConnect = async function () {
   try {
     showToast("Opening WalletConnect...");
+
+    setTimeout(() => {
+      const miniDexModal = document.getElementById("walletModal");
+      if (miniDexModal) {
+        miniDexModal.style.pointerEvents = "none";
+        miniDexModal.style.opacity = "0";
+        miniDexModal.style.zIndex = "1";
+      }
+    }, 600);
 
     const EthereumProvider = await loadWalletConnectProvider();
 

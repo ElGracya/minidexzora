@@ -1298,7 +1298,7 @@ body > .logo:last-of-type {
       <small style="display:block; margin-top:6px; color: var(--green); font-weight:600;" id="liveUsdConversion">Estimated Value: $0.00 USD</small>
     </div>
 
-    <button id="confirmOnchainBuyBtn" class="btn" style="width:100%; padding:12px; border-radius:12px; background:var(--blue-accent); color:#fff; font-weight:700;">
+    <button id="confirmOnchainBuyBtn" class="btn" style="width:100%; padding:12px; border-radius:12px; background:var(--blue-accent); color:#fff; font-weight:700;" onclick="confirmZoraBuyTransaction()">
       Confirm Purchase
     </button>
   </div>
@@ -1657,91 +1657,75 @@ function calculateLiveUsdPrice(ethValue) {
 
 // Mengubah aksi tombol buy di tabel untuk memancing modal input, bukan langsung beli instan
 async function executeBuyTransaction(contractAddress, tokenSymbol) {
-  if (!userWalletAddress || !ethersSigner) { 
-    openModal('walletModal'); 
+  if (!userWalletAddress || !ethersSigner) {
+    openModal('walletModal');
     showToast("⚠️ Please connect your Web3 wallet first.");
-    return; 
-  }
-  
-  // Ambil harga ETH terbaru sebelum pop-up terbuka
-  await fetchLiveEthPrice();
-  
-  activeBuyContractAddress = contractAddress !== "0x0000000000000000000000000000000000000000" ? contractAddress : "0x777777C338d93e2C7Eee08C10247d8c2049e6243";
-  activeBuyTokenSymbol = tokenSymbol;
-
-  document.getElementById("buyModalTokenSymbol").textContent = `$${tokenSymbol}`;
-  document.getElementById("buyModalTokenAddress").textContent = `Contract: ${activeBuyContractAddress.slice(0,10)}...${activeBuyContractAddress.slice(-8)}`;
-  document.getElementById("buyEthAmount").value = "";
-  document.getElementById("liveUsdConversion").textContent = `Estimated Value: $0.00 USD (Rate: $${currentEthPriceUsd}/ETH)`;
-  
-  openModal('buyTokenModal');
-}
-
-// Eksekusi transaksi on-chain setelah user menekan 'Confirm Purchase' di dalam modal
-document.addEventListener("click", function(e) {
-  if(e.target && e.target.id === "confirmOnchainBuyBtn") {
-    processFinalOnchainPurchase();
-  }
-});
-
-async function processFinalOnchainPurchase() {
-  const ethInput = document.getElementById("buyEthAmount").value;
-  const finalBuyBtn = document.getElementById("confirmOnchainBuyBtn");
-  const ethValueParsed = parseFloat(ethInput);
-
-  if (!ethInput || isNaN(ethValueParsed) || ethValueParsed <= 0) {
-    showToast("⚠️ Masukkan total nominal ETH yang valid untuk membeli!");
     return;
   }
 
-  finalBuyBtn.disabled = true;
-  finalBuyBtn.textContent = "Broadcasting...";
+  activeBuyContractAddress = contractAddress;
+  activeBuyTokenSymbol = tokenSymbol;
+
+  document.getElementById("buyModalTokenSymbol").textContent = tokenSymbol;
+  document.getElementById("buyModalTokenAddress").textContent = contractAddress;
+  document.getElementById("buyEthAmount").value = "";
+  document.getElementById("liveUsdConversion").textContent = "Estimated Value: $0.00 USD";
+
+  openModal("buyTokenModal");
+}
+
+async function confirmZoraBuyTransaction() {
+  const finalBuyBtn = document.getElementById("confirmOnchainBuyBtn");
+  const ethInput = document.getElementById("buyEthAmount").value;
+
+  if (!ethInput || parseFloat(ethInput) <= 0) {
+    showToast("⚠️ Please enter a valid ETH amount.");
+    return;
+  }
 
   try {
-    // Force OKX / MetaMask wallet to switch to Base Network
-    try {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x2105' }],
-      });
-    } catch (switchErr) {
-      if (switchErr.code === 4902) {
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: '0x2105',
-            chainName: 'Base',
-            nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-            rpcUrls: ['https://mainnet.base.org'],
-            blockExplorerUrls: ['https://basescan.org']
-          }]
-        });
-      }
-    }
+    finalBuyBtn.disabled = true;
+    finalBuyBtn.innerHTML = `<span class="deploy-spinner"></span> Preparing Zora trade...`;
 
-    showToast(`🔵 Wallet Connected: Please confirm your purchase of $${activeBuyTokenSymbol} for ${ethInput} ETH.`);
+    await ensureBaseNetwork();
 
-    // Send purchase transaction with the ETH amount entered by the user to Base blockchain
-    const tx = await ethersSigner.sendTransaction({
-      to: activeBuyContractAddress,
-      value: ethers.utils.parseEther(ethInput), // Menggunakan value dinamis sesuai ketikan user
-      gasLimit: 95000
+    showToast(`🔵 Preparing Zora trade for $${activeBuyTokenSymbol}...`);
+
+    const quoteRes = await fetch(`${API_BASE}/api/buy-coin-call`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contractAddress: activeBuyContractAddress,
+        ethAmount: ethInput,
+        sender: userWalletAddress
+      })
     });
 
-    showToast("⛓️ Transaction broadcast to Base. Waiting for block confirmation...");
+    const quote = await quoteRes.json();
+    if (!quoteRes.ok) throw new Error(quote.error || "Failed to prepare Zora trade.");
+
+    showToast("🔵 Please confirm the transaction in your wallet.");
+
+    const tx = await ethersSigner.sendTransaction({
+      to: quote.to,
+      data: quote.data,
+      value: ethers.BigNumber.from(quote.value || "0")
+    });
+
+    showToast("⛓️ Transaction sent to Base. Waiting for confirmation...");
     await tx.wait();
 
     closeModal("buyTokenModal");
-    showToast(`🎉 Purchase successful! ${ethInput} ETH of $${activeBuyTokenSymbol} has been sent to your wallet.`);
+    showToast(`🎉 Purchase successful! $${activeBuyTokenSymbol} has been bought through Zora.`);
+    fetchCoins();
   } catch (error) {
-    showToast("❌ Transaction failed or was rejected by the wallet.");
+    showToast(error.message || "❌ Transaction failed or was rejected by the wallet.");
     console.error(error);
   } finally {
     finalBuyBtn.disabled = false;
-    finalBuyBtn.textContent = "Confirm Purchase";
+    finalBuyBtn.innerHTML = "Confirm Purchase";
   }
 }
-
 
 function openModal(id){ document.getElementById(id).classList.add("show"); }
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }

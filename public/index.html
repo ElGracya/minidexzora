@@ -1122,6 +1122,191 @@ body > .logo:last-of-type {
 }
 </style>
 
+
+<style id="wallet-premium-ui-v1">
+.wallet-premium-modal {
+  max-width: 520px !important;
+  padding: 28px !important;
+  border-radius: 24px !important;
+}
+
+.wallet-premium-head {
+  align-items: flex-start !important;
+  margin-bottom: 20px !important;
+}
+
+.wallet-mini-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-weight: 900;
+  font-size: 13px;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+
+.wallet-mini-brand img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.wallet-premium-head h3 {
+  font-size: 28px !important;
+  line-height: 1.1 !important;
+  margin: 0 0 8px !important;
+  letter-spacing: -0.04em !important;
+}
+
+.wallet-premium-head p {
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 360px;
+}
+
+.wallet-premium-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wallet-premium-option {
+  width: 100%;
+  border: 1px solid #e7ebf2;
+  background: #fff;
+  border-radius: 18px;
+  padding: 14px 14px;
+  display: grid;
+  grid-template-columns: 46px 1fr auto 18px;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
+}
+
+.wallet-premium-option:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,82,255,.25);
+  box-shadow: 0 10px 24px rgba(15,23,42,.06);
+  background: #fbfdff;
+}
+
+.wallet-premium-option.recommended {
+  border-color: rgba(0,82,255,.35);
+  box-shadow: 0 8px 22px rgba(0,82,255,.06);
+}
+
+.wallet-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.wallet-metamask { background: #fff4e5; }
+.wallet-coinbase { background: #eaf2ff; color: #0052ff; font-size: 28px; }
+.wallet-okx { background: #111; color: #fff; font-size: 25px; }
+.wallet-wc { background: #eef4ff; color: #0052ff; font-size: 28px; }
+
+.wallet-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.wallet-copy strong {
+  color: #111827;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.wallet-copy small {
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.wallet-badge {
+  background: rgba(22,163,74,.1);
+  color: #15803d;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 8px;
+  border-radius: 999px;
+}
+
+.wallet-arrow {
+  color: #9ca3af;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.disabled-option {
+  opacity: .65;
+  cursor: not-allowed;
+}
+
+.disabled-option:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.wallet-trust-box {
+  margin-top: 16px;
+  border: 1px solid #e7ebf2;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wallet-trust-box strong {
+  font-size: 13px;
+  color: #111827;
+}
+
+.wallet-trust-box span {
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.45;
+}
+
+@media screen and (max-width: 768px) {
+  .wallet-premium-modal {
+    width: calc(100% - 28px) !important;
+    padding: 24px !important;
+    border-radius: 24px !important;
+  }
+
+  .wallet-premium-head h3 {
+    font-size: 26px !important;
+  }
+
+  .wallet-premium-option {
+    grid-template-columns: 44px 1fr 18px;
+    padding: 13px;
+  }
+
+  .wallet-badge {
+    display: none;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -1277,10 +1462,62 @@ body > .logo:last-of-type {
 </div>
 
 <div class="overlay" id="walletModal">
-  <div class="modal">
-    <div class="modal-head"><h3>Connect Web3 Wallet</h3><button class="close-x" onclick="closeModal('walletModal')">✕</button></div>
-    <div class="wallet-option" onclick="connectWeb3Wallet('MetaMask')"><span style="font-size:18px; margin-right:10px;">🦊</span> MetaMask</div>
-    <div class="wallet-option" onclick="connectWeb3Wallet('Coinbase')"><span style="font-size:18px; margin-right:10px;">🔵</span> Coinbase Wallet</div>
+  <div class="modal wallet-premium-modal">
+    <div class="modal-head wallet-premium-head">
+      <div>
+        <div class="wallet-mini-brand">
+          <img src="/mini-zora-logo.jpg?v=900" alt="MiniDex">
+          <span>MINI DEX</span>
+        </div>
+        <h3>Connect Wallet</h3>
+        <p>Choose a wallet to trade, create tokens, and explore Base safely.</p>
+      </div>
+      <button class="close-x" onclick="closeModal('walletModal')">✕</button>
+    </div>
+
+    <div class="wallet-premium-list">
+      <button class="wallet-premium-option recommended" onclick="connectWeb3Wallet('MetaMask')">
+        <span class="wallet-icon wallet-metamask">🦊</span>
+        <span class="wallet-copy">
+          <strong>MetaMask</strong>
+          <small>Most popular Web3 wallet</small>
+        </span>
+        <span class="wallet-badge">Recommended</span>
+        <span class="wallet-arrow">›</span>
+      </button>
+
+      <button class="wallet-premium-option" onclick="connectWeb3Wallet('Coinbase')">
+        <span class="wallet-icon wallet-coinbase">●</span>
+        <span class="wallet-copy">
+          <strong>Coinbase Wallet</strong>
+          <small>Official Base ecosystem wallet</small>
+        </span>
+        <span class="wallet-arrow">›</span>
+      </button>
+
+      <button class="wallet-premium-option" onclick="connectWeb3Wallet('OKX')">
+        <span class="wallet-icon wallet-okx">▦</span>
+        <span class="wallet-copy">
+          <strong>OKX Wallet</strong>
+          <small>Secure multi-chain wallet</small>
+        </span>
+        <span class="wallet-arrow">›</span>
+      </button>
+
+      <button class="wallet-premium-option disabled-option" type="button">
+        <span class="wallet-icon wallet-wc">◇</span>
+        <span class="wallet-copy">
+          <strong>WalletConnect</strong>
+          <small>Coming soon — connect 600+ wallets</small>
+        </span>
+        <span class="wallet-arrow">›</span>
+      </button>
+    </div>
+
+    <div class="wallet-trust-box">
+      <strong>Secure & non-custodial</strong>
+      <span>MiniDex never has access to your private keys or seed phrase.</span>
+    </div>
   </div>
 </div>
 

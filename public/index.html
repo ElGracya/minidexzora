@@ -1862,9 +1862,7 @@ wcm-container,
         <input type="number" id="tokenSupply" value="1000000000">
       </div>
 
-      <button id="deployTokenBtn"
-        class="btn minidex-create-submit"
-        onclick="submitCreateTokenRealtime()">
+      <button id="deployTokenBtn" type="button" class="btn minidex-create-submit" onclick="submitCreateTokenRealtime()">
         Create Token
       </button>
     </div>
@@ -2531,6 +2529,19 @@ window.connectWalletConnect = async function () {
     showToast("❌ WalletConnect failed to load. Check browser console.");
   }
 };
+</script>
+
+
+<script id="create-token-button-fallback-fix">
+document.addEventListener("DOMContentLoaded", function () {
+  const btn = document.getElementById("deployTokenBtn");
+  if (btn && typeof submitCreateTokenRealtime === "function") {
+    btn.onclick = function(e) {
+      e.preventDefault();
+      submitCreateTokenRealtime();
+    };
+  }
+});
 </script>
 
 </body>

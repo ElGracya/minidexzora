@@ -2067,18 +2067,12 @@ function withTimeout(promise, ms, message) {
 
 window.connectWalletConnect = async function () {
   try {
+    closeModal("walletModal");
     showToast("Opening WalletConnect...");
-    const miniDexWalletModal = document.getElementById("walletModal");
-    if (miniDexWalletModal) {
-      miniDexWalletModal.style.pointerEvents = "none";
-      miniDexWalletModal.style.opacity = "0";
-    }
 
     if (!WC_PROJECT_ID) {
       throw new Error("WalletConnect Project ID is missing.");
     }
-
-    await new Promise(resolve => setTimeout(resolve, 250));
 
     const wcProvider = await withTimeout(
       EthereumProvider.init({
@@ -2110,11 +2104,7 @@ window.connectWalletConnect = async function () {
     ethersProvider = new ethers.providers.Web3Provider(wcProvider);
     ethersSigner = ethersProvider.getSigner();
 
-    if (miniDexWalletModal) {
-      miniDexWalletModal.classList.remove("show");
-      miniDexWalletModal.style.pointerEvents = "";
-      miniDexWalletModal.style.opacity = "";
-    }
+    closeModal("walletModal");
 
     const shortened = userWalletAddress.slice(0,6) + "..." + userWalletAddress.slice(-4);
     const btn = document.getElementById("walletConnectBtn");
@@ -2125,12 +2115,6 @@ window.connectWalletConnect = async function () {
     showToast("✅ WalletConnect connected successfully.");
     fetchCoins();
   } catch (err) {
-    const miniDexWalletModal = document.getElementById("walletModal");
-    if (miniDexWalletModal) {
-      miniDexWalletModal.style.pointerEvents = "";
-      miniDexWalletModal.style.opacity = "";
-      miniDexWalletModal.classList.add("show");
-    }
     console.error("WalletConnect error:", err);
     showToast("❌ " + (err.message || "WalletConnect connection canceled."));
   }

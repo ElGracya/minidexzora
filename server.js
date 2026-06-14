@@ -1,4 +1,4 @@
-const { createWalletClient, http, createPublicClient, parseEther } = require("viem");
+const { createWalletClient, http, createPublicClient } = require("viem");
 const { privateKeyToAccount } = require("viem/accounts");
 const { base } = require("viem/chains");
 
@@ -14,7 +14,7 @@ function sanitizeBigInt(obj) {
   return obj;
 }
 
-const { createMetadataBuilder, createZoraUploaderForCreator, createCoinCall, createTradeCall, CreateConstants, setApiKey } = require("@zoralabs/coins-sdk");
+const { createMetadataBuilder, createZoraUploaderForCreator, createCoinCall, CreateConstants, setApiKey } = require("@zoralabs/coins-sdk");
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -108,37 +108,6 @@ app.get("/api/tokens", async (req, res) => {
 
 
 
-
-
-
-app.post("/api/buy-coin-call", async (req, res) => {
-  try {
-    const { contractAddress, ethAmount, sender } = req.body;
-
-    if (!contractAddress || !ethAmount || !sender) {
-      return res.status(400).json({ error: "contractAddress, ethAmount, and sender are required." });
-    }
-
-    const quote = await createTradeCall({
-      sell: { type: "eth" },
-      buy: { type: "erc20", address: contractAddress },
-      amountIn: parseEther(String(ethAmount)),
-      slippage: 0.05,
-      sender,
-      recipient: sender
-    });
-
-    return res.json({
-      success: true,
-      to: quote.call.target,
-      data: quote.call.data,
-      value: quote.call.value.toString()
-    });
-  } catch (err) {
-    console.error("Buy quote failed:", err);
-    return res.status(500).json({ error: err.message || "Failed to create Zora buy transaction." });
-  }
-});
 
 
 app.post("/api/create-coin-call", async (req, res) => {

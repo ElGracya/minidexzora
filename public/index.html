@@ -2211,11 +2211,15 @@ async function submitCreateTokenRealtime(){
   const description = document.getElementById("tokenDesc").value.trim();
   const deployBtn = document.getElementById("deployTokenBtn");
 
-  if(!name || !symbol) { showToast("⚠️ Token name and symbol are required."); return; }
+  if(!name || !symbol) {
+    showToast("⚠️ Name dan Symbol wajib diisi.");
+    return;
+  }
 
   deployBtn.disabled = true;
   deployBtn.innerHTML = `<span class="deploy-spinner"></span> Deploying token...`;
-  showToast("🚀 Deploying token to Base via MiniDex... Please keep this page open.");
+  deployBtn.style.opacity = "0.75";
+  showToast("🚀 Sedang deploy token ke Base via MiniDex...");
 
   try {
     const res = await fetch(`${API_BASE}/api/create-coin-call`, {
@@ -2230,36 +2234,28 @@ async function submitCreateTokenRealtime(){
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Failed to deploy token.");
+    if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
 
     closeModal("createTokenModal");
-
-    const contractAddress =
-      data.predictedCoinAddress ||
-      data.address ||
-      data.coinAddress ||
-      data.contractAddress ||
-      data.deployedAddress ||
-      "Address unavailable";
-
-    const cleanSymbol = symbol.toUpperCase();
-
-    showToast(`🚀 $${cleanSymbol} has been successfully deployed.`);
-    showTokenSuccessModal(cleanSymbol, contractAddress);
+    showToast(`🚀 $${symbol.toUpperCase()} berhasil di-deploy!`);
 
     document.getElementById("tokenName").value = "";
     document.getElementById("tokenSymbol").value = "";
     document.getElementById("tokenDesc").value = "";
     base64UploadedImage = null;
-    document.getElementById("fileStatusText").textContent = "📁 Click to upload token logo";
 
-    switchFilter('NEW');
+    const fileText = document.getElementById("fileStatusText");
+    if (fileText) fileText.innerHTML = "<strong>Add token image</strong><br><small>PNG or JPG recommended</small>";
+
+    if (typeof switchFilter === "function") switchFilter("NEW");
+    if (typeof fetchCoins === "function") fetchCoins();
+
   } catch(err) {
     showToast(`❌ ${err.message}`);
     console.error(err);
   } finally {
     deployBtn.disabled = false;
-    deployBtn.innerHTML = "Deploy via Wallet Contract";
+    deployBtn.innerHTML = "Create Token";
     deployBtn.style.opacity = "1";
   }
 }

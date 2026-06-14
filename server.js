@@ -21,6 +21,7 @@ const cors = require("cors");
 const fetch = require("node-fetch");
 
 const app = express();
+const miniDexMetadataStore = new Map();
 app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.static("public"));

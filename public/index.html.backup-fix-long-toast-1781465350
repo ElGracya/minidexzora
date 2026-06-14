@@ -1771,31 +1771,110 @@ wcm-container,
 </style>
 
 
-
+<style id="minidex-upload-thumbnail-css">
+.minidex-upload-thumb{
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  object-fit:cover;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  flex-shrink:0;
+}
+.minidex-upload-selected .minidex-upload-action{
+  color:#0b5cff;
+}
+</style>
 \n
 <style id="minidex-upload-thumbnail-css">
 .minidex-upload-thumb{
-  width:46px;height:46px;border-radius:12px;object-fit:cover;
-  border:1px solid #e5e7eb;background:#fff;flex-shrink:0;
+  width:46px;
+  height:46px;
+  border-radius:12px;
+  object-fit:cover;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  flex-shrink:0;
 }
-.minidex-upload-selected .minidex-upload-action{color:#0b5cff;}
+.minidex-upload-selected .minidex-upload-action{
+  color:#0b5cff;
+}
 </style>
-
-
-<style id="minidex-success-modal-css">
-.minidex-success-overlay{position:fixed;inset:0;background:rgba(17,24,39,.34);display:none;align-items:center;justify-content:center;z-index:9999;padding:18px}
-.minidex-success-card{width:100%;max-width:420px;background:#fff;border:1px solid #e6eaf0;border-radius:18px;padding:22px;box-shadow:0 24px 70px rgba(15,23,42,.18)}
-.minidex-success-card h3{margin:0 0 8px;font-size:22px;font-weight:800;color:#111827}
-.minidex-success-card p{margin:0 0 20px;font-size:14px;color:#667085;line-height:1.45}
-.minidex-success-label{font-size:12px;font-weight:800;color:#667085;margin-bottom:8px}
-.minidex-success-contract{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#fafbfc}
-.minidex-success-address{flex:1;min-width:0;font-size:13px;font-weight:700;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.minidex-success-copy{border:1px solid #e5e7eb;background:#fff;color:#111827;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:800;cursor:pointer}
-.minidex-success-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.minidex-success-actions a{text-align:center;text-decoration:none;border-radius:12px;padding:12px;font-size:13px;font-weight:800}
-.minidex-success-zora{background:#0b5cff;color:#fff}
-.minidex-success-scan{background:#fff;color:#111827;border:1px solid #e5e7eb}
-.minidex-success-close{width:100%;margin-top:12px;border:0;background:transparent;color:#667085;font-size:13px;font-weight:800;cursor:pointer;padding:10px}
+\n
+<style id="minidex-token-success-css">
+.minidex-success-panel{
+  padding:6px 0 2px;
+}
+.minidex-success-title{
+  font-size:22px;
+  font-weight:800;
+  color:#111827;
+  margin-bottom:6px;
+}
+.minidex-success-desc{
+  font-size:14px;
+  color:#6b7280;
+  margin-bottom:22px;
+}
+.minidex-contract-box{
+  border:1px solid #e5e7eb;
+  background:#fafbfc;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:18px;
+}
+.minidex-contract-label{
+  font-size:12px;
+  font-weight:700;
+  color:#6b7280;
+  margin-bottom:8px;
+}
+.minidex-contract-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.minidex-contract-address{
+  flex:1;
+  font-size:14px;
+  font-weight:700;
+  color:#111827;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.minidex-copy-btn{
+  border:1px solid #e5e7eb;
+  background:#fff;
+  border-radius:10px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+.minidex-success-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+.minidex-success-btn{
+  text-align:center;
+  text-decoration:none;
+  border-radius:12px;
+  padding:12px 14px;
+  font-size:13px;
+  font-weight:800;
+}
+.minidex-success-btn.primary{
+  background:#0b5cff;
+  color:#fff;
+}
+.minidex-success-btn.secondary{
+  background:#fff;
+  color:#111827;
+  border:1px solid #e5e7eb;
+}
 </style>
 
 </head>
@@ -2326,37 +2405,42 @@ function processImageUpload(input) {
 
 
 
-function minidexShortAddress(addr) {
+function shortAddress(addr) {
   if (!addr || addr.length < 12) return addr || "";
   return addr.slice(0, 6) + "..." + addr.slice(-4);
 }
 
-function openTokenSuccessModal(contractAddress) {
-  const modal = document.getElementById("minidexTokenSuccessModal");
-  const addr = document.getElementById("minidexSuccessAddress");
-  const scan = document.getElementById("minidexSuccessBaseScan");
-  const copy = document.getElementById("minidexSuccessCopy");
-  if (!modal || !addr || !scan || !copy) return;
+function showCreateTokenSuccess(contractAddress) {
+  const modal = document.getElementById("createTokenModal");
+  if (!modal) return;
 
-  window.__minidexLastTokenAddress = contractAddress || "";
-  addr.textContent = minidexShortAddress(window.__minidexLastTokenAddress);
-  addr.title = window.__minidexLastTokenAddress;
-  scan.href = "https://basescan.org/address/" + window.__minidexLastTokenAddress;
-  copy.textContent = "Copy";
-  modal.style.display = "flex";
+  const box = modal.querySelector(".modal-content") || modal.querySelector(".modal-box") || modal.querySelector(".modal-card") || modal.querySelector("div");
+  if (!box) return;
+
+  const address = contractAddress || "";
+  const baseScanUrl = `https://basescan.org/address/${address}`;
+  const zoraUrl = "https://zora.co/@minidex";
+
+  box.innerHTML = `
+    <div class="minidex-success-panel">
+      <div class="minidex-success-title">Token Created</div>
+      <div class="minidex-success-desc">Your token was successfully deployed.</div>
+
+      <div class="minidex-contract-box">
+        <div class="minidex-contract-label">Contract</div>
+        <div class="minidex-contract-row">
+          <div class="minidex-contract-address" title="${address}">${shortAddress(address)}</div>
+          <button type="button" class="minidex-copy-btn" onclick="navigator.clipboard.writeText('${address}'); this.textContent='Copied';">Copy</button>
+        </div>
+      </div>
+
+      <div class="minidex-success-actions">
+        <a class="minidex-success-btn primary" href="${zoraUrl}" target="_blank" rel="noopener">View on Zora</a>
+        <a class="minidex-success-btn secondary" href="${baseScanUrl}" target="_blank" rel="noopener">View on BaseScan</a>
+      </div>
+    </div>
+  `;
 }
-
-function closeTokenSuccessModal() {
-  const modal = document.getElementById("minidexTokenSuccessModal");
-  if (modal) modal.style.display = "none";
-}
-
-document.addEventListener("click", function(e) {
-  if (e.target && e.target.id === "minidexSuccessCopy") {
-    navigator.clipboard.writeText(window.__minidexLastTokenAddress || "");
-    e.target.textContent = "Copied";
-  }
-});
 
 
 async function submitCreateTokenRealtime(){
@@ -2366,14 +2450,14 @@ async function submitCreateTokenRealtime(){
   const deployBtn = document.getElementById("deployTokenBtn");
 
   if(!name || !symbol) {
-    showToast("⚠️ Name and symbol are required.");
+    showToast("⚠️ Name dan Symbol wajib diisi.");
     return;
   }
 
   deployBtn.disabled = true;
   deployBtn.innerHTML = `<span class="deploy-spinner"></span> Deploying token...`;
   deployBtn.style.opacity = "0.75";
-  showToast("🚀 Deploying token to Base via MiniDex...");
+  showToast("🚀 Sedang deploy token ke Base via MiniDex...");
 
   try {
     const res = await fetch(`${API_BASE}/api/create-coin-call`, {
@@ -2388,11 +2472,10 @@ async function submitCreateTokenRealtime(){
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Token deployment failed.");
+    if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
 
-    closeModal("createTokenModal");
-    showToast(`🚀 $${symbol.toUpperCase()} was successfully deployed!`);
-    openTokenSuccessModal(data.predictedCoinAddress);
+    showCreateTokenSuccess(data.predictedCoinAddress);
+    showToast(`$${symbol.toUpperCase()} berhasil di-deploy.`);
 
     document.getElementById("tokenName").value = "";
     document.getElementById("tokenSymbol").value = "";
@@ -2434,11 +2517,11 @@ async function connectWeb3Wallet(providerName) {
 }
 
 
-let currentEthPriceUsd = 3200; // Fallback price if the API is unavailable
+let currentEthPriceUsd = 3200; // Harga basis fallback jika API interupsi
 let activeBuyContractAddress = "";
 let activeBuyTokenSymbol = "";
 
-// Fetch live ETH price from CoinGecko in real time
+// Mengambil harga live ETH murni dari API CoinGecko secara real-time
 async function fetchLiveEthPrice() {
   try {
     const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
@@ -2446,10 +2529,10 @@ async function fetchLiveEthPrice() {
     if(data && data.ethereum && data.ethereum.usd) {
       currentEthPriceUsd = data.ethereum.usd;
     }
-  } catch(e) { console.log("Using fallback ETH price."); }
+  } catch(e) { console.log("Menggunakan basis harga ETH fallback."); }
 }
 
-// Auto USD calculator when user enters ETH amount
+// Fungsi kalkulator dollar otomatis saat user mengetik nominal ETH
 function calculateLiveUsdPrice(ethValue) {
   const usdBox = document.getElementById("liveUsdConversion");
   const val = parseFloat(ethValue) || 0;
@@ -2457,7 +2540,7 @@ function calculateLiveUsdPrice(ethValue) {
   usdBox.textContent = `Estimated Value: $${totalUsd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD (Rate: $${currentEthPriceUsd}/ETH)`;
 }
 
-// Change buy button action to open input modal instead of instant buy
+// Mengubah aksi tombol buy di tabel untuk memancing modal input, bukan langsung beli instan
 async function executeBuyTransaction(contractAddress, tokenSymbol) {
   if (!userWalletAddress || !ethersSigner) {
     openModal('walletModal');
@@ -2680,27 +2763,6 @@ window.connectWalletConnect = async function () {
   }
 };
 </script>
-
-
-<div id="minidexTokenSuccessModal" class="minidex-success-overlay">
-  <div class="minidex-success-card">
-    <h3>Token Created</h3>
-    <p>Your token was successfully deployed on Base.</p>
-
-    <div class="minidex-success-label">Contract</div>
-    <div class="minidex-success-contract">
-      <div id="minidexSuccessAddress" class="minidex-success-address">0x...</div>
-      <button type="button" id="minidexSuccessCopy" class="minidex-success-copy">Copy</button>
-    </div>
-
-    <div class="minidex-success-actions">
-      <a id="minidexSuccessZora" class="minidex-success-zora" href="https://zora.co/@minidex" target="_blank" rel="noopener">View on Zora</a>
-      <a id="minidexSuccessBaseScan" class="minidex-success-scan" href="#" target="_blank" rel="noopener">View on BaseScan</a>
-    </div>
-
-    <button type="button" class="minidex-success-close" onclick="closeTokenSuccessModal()">Close</button>
-  </div>
-</div>
 
 </body>
 </html>

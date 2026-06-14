@@ -2366,14 +2366,14 @@ async function submitCreateTokenRealtime(){
   const deployBtn = document.getElementById("deployTokenBtn");
 
   if(!name || !symbol) {
-    showToast("⚠️ Name and symbol are required.");
+    showToast("⚠️ Name dan Symbol wajib diisi.");
     return;
   }
 
   deployBtn.disabled = true;
   deployBtn.innerHTML = `<span class="deploy-spinner"></span> Deploying token...`;
   deployBtn.style.opacity = "0.75";
-  showToast("🚀 Deploying token to Base via MiniDex...");
+  showToast("🚀 Sedang deploy token ke Base via MiniDex...");
 
   try {
     const res = await fetch(`${API_BASE}/api/create-coin-call`, {
@@ -2388,10 +2388,10 @@ async function submitCreateTokenRealtime(){
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Token deployment failed.");
+    if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
 
     closeModal("createTokenModal");
-    showToast(`🚀 $${symbol.toUpperCase()} was successfully deployed!`);
+    showToast(`🚀 $${symbol.toUpperCase()} berhasil di-deploy!`);
     openTokenSuccessModal(data.predictedCoinAddress);
 
     document.getElementById("tokenName").value = "";
@@ -2434,11 +2434,11 @@ async function connectWeb3Wallet(providerName) {
 }
 
 
-let currentEthPriceUsd = 3200; // Fallback price if the API is unavailable
+let currentEthPriceUsd = 3200; // Harga basis fallback jika API interupsi
 let activeBuyContractAddress = "";
 let activeBuyTokenSymbol = "";
 
-// Fetch live ETH price from CoinGecko in real time
+// Mengambil harga live ETH murni dari API CoinGecko secara real-time
 async function fetchLiveEthPrice() {
   try {
     const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
@@ -2446,10 +2446,10 @@ async function fetchLiveEthPrice() {
     if(data && data.ethereum && data.ethereum.usd) {
       currentEthPriceUsd = data.ethereum.usd;
     }
-  } catch(e) { console.log("Using fallback ETH price."); }
+  } catch(e) { console.log("Menggunakan basis harga ETH fallback."); }
 }
 
-// Auto USD calculator when user enters ETH amount
+// Fungsi kalkulator dollar otomatis saat user mengetik nominal ETH
 function calculateLiveUsdPrice(ethValue) {
   const usdBox = document.getElementById("liveUsdConversion");
   const val = parseFloat(ethValue) || 0;
@@ -2457,7 +2457,7 @@ function calculateLiveUsdPrice(ethValue) {
   usdBox.textContent = `Estimated Value: $${totalUsd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD (Rate: $${currentEthPriceUsd}/ETH)`;
 }
 
-// Change buy button action to open input modal instead of instant buy
+// Mengubah aksi tombol buy di tabel untuk memancing modal input, bukan langsung beli instan
 async function executeBuyTransaction(contractAddress, tokenSymbol) {
   if (!userWalletAddress || !ethersSigner) {
     openModal('walletModal');

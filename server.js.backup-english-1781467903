@@ -116,15 +116,15 @@ app.post("/api/create-coin-call", async (req, res) => {
     const { name, symbol, description, imageUri } = req.body;
 
     if (!deployerAccount || !walletClient || !publicClient) {
-      return res.status(500).json({ error: "Deployer wallet is not configured. DEPLOYER_PRIVATE_KEY is missing." });
+      return res.status(500).json({ error: "Deployer wallet belum dikonfigurasi (DEPLOYER_PRIVATE_KEY kosong)." });
     }
     if (!name || !symbol) {
-      return res.status(400).json({ error: "Name and symbol are required." });
+      return res.status(400).json({ error: "name dan symbol wajib diisi" });
     }
 
     const cleanSymbol = String(symbol).replace(/[^A-Za-z0-9]/g, "").toUpperCase().slice(0, 12);
     if (!cleanSymbol) {
-      return res.status(400).json({ error: "Symbol must contain letters or numbers, example: MINIDEX" });
+      return res.status(400).json({ error: "Symbol harus berupa huruf/angka, contoh: MINIDEX" });
     }
 
     let imageFile;

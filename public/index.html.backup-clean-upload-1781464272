@@ -1707,95 +1707,69 @@ wcm-container,
 </style>
 
 
-
-
-
-<style id="minidex-clean-upload-css">
+<style id="premium-upload-design-only-css">
 .minidex-upload-box{
-  display:block !important;
-  padding:18px !important;
-  border:1px solid #e6eaf0 !important;
-  border-radius:14px !important;
-  background:#fafbfc !important;
-  text-align:left !important;
-  cursor:pointer !important;
-  transition:.18s ease !important;
+  padding:24px 18px !important;
+  border-radius:22px !important;
+  border:1.5px dashed rgba(124,92,255,.75) !important;
+  background:
+    radial-gradient(circle at top, rgba(124,92,255,.18), transparent 45%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)) !important;
+  transition:.22s ease !important;
 }
+
 .minidex-upload-box:hover{
-  background:#f6f8fb !important;
-  border-color:#cfd7e3 !important;
+  border-color:rgba(139,92,246,1) !important;
+  box-shadow:0 18px 45px rgba(124,92,255,.18) !important;
+  transform:translateY(-1px);
 }
-.minidex-upload-clean{
+
+.premium-upload-shell{
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:14px;
+  justify-content:center;
+  gap:8px;
 }
-.minidex-upload-icon{
-  width:42px;
-  height:42px;
-  border-radius:12px;
+
+.premium-upload-icon{
+  width:64px;
+  height:64px;
+  border-radius:22px;
   display:grid;
   place-items:center;
-  background:#eef4ff;
-  border:1px solid #d9e6ff;
-  color:#0b5cff;
-  flex-shrink:0;
+  background:linear-gradient(135deg,#7c3aed,#2563eb);
+  box-shadow:0 16px 36px rgba(124,92,255,.35), inset 0 1px 0 rgba(255,255,255,.25);
 }
-.minidex-upload-icon svg{
-  width:21px;
-  height:21px;
-  stroke:currentColor;
-}
-.minidex-upload-title{
-  font-size:14px;
-  font-weight:700;
-  color:#111827;
-  line-height:1.25;
-}
-.minidex-upload-subtitle{
-  margin-top:3px;
-  font-size:12px;
-  font-weight:500;
-  color:#6b7280;
-}
-.minidex-upload-action{
-  margin-left:auto;
-  padding:8px 12px;
-  border-radius:10px;
-  border:1px solid #e5e7eb;
-  background:#fff;
-  color:#111827;
-  font-size:12px;
-  font-weight:700;
-}
-</style>
 
-
-
-\n
-<style id="minidex-upload-thumbnail-css">
-.minidex-upload-thumb{
-  width:46px;height:46px;border-radius:12px;object-fit:cover;
-  border:1px solid #e5e7eb;background:#fff;flex-shrink:0;
+.premium-upload-icon svg{
+  width:31px;
+  height:31px;
+  stroke:white;
 }
-.minidex-upload-selected .minidex-upload-action{color:#0b5cff;}
-</style>
 
+.premium-upload-title{
+  margin-top:4px;
+  font-size:16px;
+  font-weight:900;
+  color:#fff;
+}
 
-<style id="minidex-success-modal-css">
-.minidex-success-overlay{position:fixed;inset:0;background:rgba(17,24,39,.34);display:none;align-items:center;justify-content:center;z-index:9999;padding:18px}
-.minidex-success-card{width:100%;max-width:420px;background:#fff;border:1px solid #e6eaf0;border-radius:18px;padding:22px;box-shadow:0 24px 70px rgba(15,23,42,.18)}
-.minidex-success-card h3{margin:0 0 8px;font-size:22px;font-weight:800;color:#111827}
-.minidex-success-card p{margin:0 0 20px;font-size:14px;color:#667085;line-height:1.45}
-.minidex-success-label{font-size:12px;font-weight:800;color:#667085;margin-bottom:8px}
-.minidex-success-contract{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#fafbfc}
-.minidex-success-address{flex:1;min-width:0;font-size:13px;font-weight:700;color:#111827;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.minidex-success-copy{border:1px solid #e5e7eb;background:#fff;color:#111827;border-radius:10px;padding:7px 10px;font-size:12px;font-weight:800;cursor:pointer}
-.minidex-success-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.minidex-success-actions a{text-align:center;text-decoration:none;border-radius:12px;padding:12px;font-size:13px;font-weight:800}
-.minidex-success-zora{background:#0b5cff;color:#fff}
-.minidex-success-scan{background:#fff;color:#111827;border:1px solid #e5e7eb}
-.minidex-success-close{width:100%;margin-top:12px;border:0;background:transparent;color:#667085;font-size:13px;font-weight:800;cursor:pointer;padding:10px}
+.premium-upload-subtitle{
+  font-size:12.5px;
+  color:rgba(255,255,255,.56);
+}
+
+.premium-upload-button{
+  margin-top:8px;
+  padding:9px 15px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.07);
+  color:#fff;
+  font-size:12.5px;
+  font-weight:850;
+}
 </style>
 
 </head>
@@ -1939,21 +1913,18 @@ wcm-container,
         <label>Token image</label>
         <label class="file-input-wrapper minidex-upload-box">
           
-
 <span id="fileStatusText">
-  <div class="minidex-upload-clean">
-    <div class="minidex-upload-icon">
+  <div class="premium-upload-shell">
+    <div class="premium-upload-icon">
       <svg viewBox="0 0 24 24" fill="none">
         <path d="M4 16.5V7.5C4 5.57 5.57 4 7.5 4h9C18.43 4 20 5.57 20 7.5v9c0 1.93-1.57 3.5-3.5 3.5h-9C5.57 20 4 18.43 4 16.5Z" stroke-width="1.8"/>
-        <path d="M8 14l2.2-2.2a1 1 0 0 1 1.4 0L14 14l1-1a1 1 0 0 1 1.4 0l2.6 2.6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 14l2.25-2.25a1.05 1.05 0 0 1 1.5 0L14 14l1-1a1.05 1.05 0 0 1 1.5 0L20 16.5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M8.6 8.8h.01" stroke-width="3" stroke-linecap="round"/>
       </svg>
     </div>
-    <div>
-      <div class="minidex-upload-title">Token image</div>
-      <div class="minidex-upload-subtitle">PNG, JPG, or WEBP recommended</div>
-    </div>
-    <div class="minidex-upload-action">Choose</div>
+    <div class="premium-upload-title">Upload token image</div>
+    <div class="premium-upload-subtitle">PNG, JPG, or WEBP. Square image recommended.</div>
+    <div class="premium-upload-button">Choose Artwork</div>
   </div>
 </span>
 
@@ -2303,60 +2274,13 @@ function processImageUpload(input) {
   const file = input.files[0];
   if (file) {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      base64UploadedImage = e.target.result;
-
-      const fileText = document.getElementById("fileStatusText");
-      if (fileText) {
-        fileText.innerHTML = `
-          <div class="minidex-upload-clean minidex-upload-selected">
-            <img class="minidex-upload-thumb" src="${e.target.result}" alt="Token image preview">
-            <div>
-              <div class="minidex-upload-title">Image selected</div>
-              <div class="minidex-upload-subtitle">${file.name}</div>
-            </div>
-            <div class="minidex-upload-action">Change</div>
-          </div>
-        `;
-      }
+    reader.onload = function(e) { 
+      base64UploadedImage = e.target.result; 
+      document.getElementById("fileStatusText").textContent = `✅ Image Loaded`;
     };
     reader.readAsDataURL(file);
   }
 }
-
-
-
-function minidexShortAddress(addr) {
-  if (!addr || addr.length < 12) return addr || "";
-  return addr.slice(0, 6) + "..." + addr.slice(-4);
-}
-
-function openTokenSuccessModal(contractAddress) {
-  const modal = document.getElementById("minidexTokenSuccessModal");
-  const addr = document.getElementById("minidexSuccessAddress");
-  const scan = document.getElementById("minidexSuccessBaseScan");
-  const copy = document.getElementById("minidexSuccessCopy");
-  if (!modal || !addr || !scan || !copy) return;
-
-  window.__minidexLastTokenAddress = contractAddress || "";
-  addr.textContent = minidexShortAddress(window.__minidexLastTokenAddress);
-  addr.title = window.__minidexLastTokenAddress;
-  scan.href = "https://basescan.org/address/" + window.__minidexLastTokenAddress;
-  copy.textContent = "Copy";
-  modal.style.display = "flex";
-}
-
-function closeTokenSuccessModal() {
-  const modal = document.getElementById("minidexTokenSuccessModal");
-  if (modal) modal.style.display = "none";
-}
-
-document.addEventListener("click", function(e) {
-  if (e.target && e.target.id === "minidexSuccessCopy") {
-    navigator.clipboard.writeText(window.__minidexLastTokenAddress || "");
-    e.target.textContent = "Copied";
-  }
-});
 
 
 async function submitCreateTokenRealtime(){
@@ -2366,14 +2290,14 @@ async function submitCreateTokenRealtime(){
   const deployBtn = document.getElementById("deployTokenBtn");
 
   if(!name || !symbol) {
-    showToast("⚠️ Name and symbol are required.");
+    showToast("⚠️ Name dan Symbol wajib diisi.");
     return;
   }
 
   deployBtn.disabled = true;
   deployBtn.innerHTML = `<span class="deploy-spinner"></span> Deploying token...`;
   deployBtn.style.opacity = "0.75";
-  showToast("🚀 Deploying token to Base via MiniDex...");
+  showToast("🚀 Sedang deploy token ke Base via MiniDex...");
 
   try {
     const res = await fetch(`${API_BASE}/api/create-coin-call`, {
@@ -2388,11 +2312,10 @@ async function submitCreateTokenRealtime(){
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Token deployment failed.");
+    if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
 
     closeModal("createTokenModal");
-    showToast(`🚀 $${symbol.toUpperCase()} was successfully deployed!`);
-    openTokenSuccessModal(data.predictedCoinAddress);
+    showToast(`🚀 $${symbol.toUpperCase()} berhasil di-deploy!`);
 
     document.getElementById("tokenName").value = "";
     document.getElementById("tokenSymbol").value = "";
@@ -2428,17 +2351,17 @@ async function connectWeb3Wallet(providerName) {
       const shortened = userWalletAddress.slice(0,6) + "..." + userWalletAddress.slice(-4);
       const btn = document.getElementById("walletConnectBtn");
       btn.textContent = shortened; btn.style.color = "var(--green)"; btn.style.borderColor = "var(--green)";
-      showToast(" Wallet connected successfully."); fetchCoins();
+      showToast("✅ Wallet connected successfully."); fetchCoins();
     } catch (error) { showToast("❌ Connection canceled."); }
   } else { showToast("⚠️ Web3 Extension missing."); }
 }
 
 
-let currentEthPriceUsd = 3200; // Fallback price if the API is unavailable
+let currentEthPriceUsd = 3200; // Harga basis fallback jika API interupsi
 let activeBuyContractAddress = "";
 let activeBuyTokenSymbol = "";
 
-// Fetch live ETH price from CoinGecko in real time
+// Mengambil harga live ETH murni dari API CoinGecko secara real-time
 async function fetchLiveEthPrice() {
   try {
     const res = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd");
@@ -2446,10 +2369,10 @@ async function fetchLiveEthPrice() {
     if(data && data.ethereum && data.ethereum.usd) {
       currentEthPriceUsd = data.ethereum.usd;
     }
-  } catch(e) { console.log("Using fallback ETH price."); }
+  } catch(e) { console.log("Menggunakan basis harga ETH fallback."); }
 }
 
-// Auto USD calculator when user enters ETH amount
+// Fungsi kalkulator dollar otomatis saat user mengetik nominal ETH
 function calculateLiveUsdPrice(ethValue) {
   const usdBox = document.getElementById("liveUsdConversion");
   const val = parseFloat(ethValue) || 0;
@@ -2457,7 +2380,7 @@ function calculateLiveUsdPrice(ethValue) {
   usdBox.textContent = `Estimated Value: $${totalUsd.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})} USD (Rate: $${currentEthPriceUsd}/ETH)`;
 }
 
-// Change buy button action to open input modal instead of instant buy
+// Mengubah aksi tombol buy di tabel untuk memancing modal input, bukan langsung beli instan
 async function executeBuyTransaction(contractAddress, tokenSymbol) {
   if (!userWalletAddress || !ethersSigner) {
     openModal('walletModal');
@@ -2666,7 +2589,7 @@ window.connectWalletConnect = async function () {
     btn.style.color = "var(--green)";
     btn.style.borderColor = "var(--green)";
 
-    showToast(" WalletConnect connected successfully.");
+    showToast("✅ WalletConnect connected successfully.");
     fetchCoins();
   } catch (err) {
     const miniDexModalBack = document.getElementById("walletModal");
@@ -2680,27 +2603,6 @@ window.connectWalletConnect = async function () {
   }
 };
 </script>
-
-
-<div id="minidexTokenSuccessModal" class="minidex-success-overlay">
-  <div class="minidex-success-card">
-    <h3>Token Created</h3>
-    <p>Your token was successfully deployed on Base.</p>
-
-    <div class="minidex-success-label">Contract</div>
-    <div class="minidex-success-contract">
-      <div id="minidexSuccessAddress" class="minidex-success-address">0x...</div>
-      <button type="button" id="minidexSuccessCopy" class="minidex-success-copy">Copy</button>
-    </div>
-
-    <div class="minidex-success-actions">
-      <a id="minidexSuccessZora" class="minidex-success-zora" href="https://zora.co/@minidex" target="_blank" rel="noopener">View on Zora</a>
-      <a id="minidexSuccessBaseScan" class="minidex-success-scan" href="#" target="_blank" rel="noopener">View on BaseScan</a>
-    </div>
-
-    <button type="button" class="minidex-success-close" onclick="closeTokenSuccessModal()">Close</button>
-  </div>
-</div>
 
 </body>
 </html>

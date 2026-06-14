@@ -693,6 +693,435 @@ body > .logo:last-of-type {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="mobile-mini-dex-app-v1">
+@media screen and (max-width: 768px) {
+  html, body {
+    width:100% !important;
+    overflow-x:hidden !important;
+    background:#fff !important;
+  }
+
+  header {
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:13px !important;
+    padding:22px 18px 18px !important;
+    background:#fff !important;
+    border-bottom:1px solid #eef0f4 !important;
+    position:sticky !important;
+    top:0 !important;
+    z-index:999 !important;
+  }
+
+  header .logo {
+    width:100% !important;
+    min-width:0 !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+  }
+
+  header .logo img {
+    width:34px !important;
+    height:34px !important;
+  }
+
+  header .logo span {
+    font-size:22px !important;
+    font-weight:900 !important;
+    letter-spacing:-0.04em !important;
+  }
+
+  header .logo::after {
+    content:"☰";
+    margin-left:auto;
+    font-size:24px;
+    font-weight:900;
+    color:#111827;
+  }
+
+  header::after {
+    content:"Launch tokens on Base.\A Simple. Fast. Permissionless.";
+    white-space:pre-line;
+    display:block;
+    font-size:14px;
+    line-height:1.45;
+    color:#5f6b7a;
+    margin-top:-4px;
+  }
+
+  .search-wrapper {
+    width:100% !important;
+    height:50px !important;
+    border-radius:16px !important;
+    padding:0 16px !important;
+    background:#f8fafc !important;
+    border:1px solid #e5eaf1 !important;
+  }
+
+  .search-wrapper input {
+    font-size:15px !important;
+  }
+
+  .header-right-box {
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+    width:100% !important;
+  }
+
+  .header-right-box button {
+    height:46px !important;
+    width:100% !important;
+    border-radius:14px !important;
+    font-size:15px !important;
+    font-weight:900 !important;
+  }
+
+  .header-right-box button:first-child::before {
+    content:"+ ";
+    font-weight:900;
+  }
+
+  main {
+    padding:16px 14px 34px !important;
+  }
+
+  .hero-banner,
+  .hero-container {
+    display:none !important;
+  }
+
+  main::before {
+    content:"↗  Discover Base Tokens\A Live from Zora • Real-time images";
+    white-space:pre-line;
+    display:block;
+    padding:18px 18px;
+    margin-bottom:16px;
+    border-radius:20px;
+    border:1px solid #e7ebf3;
+    background:linear-gradient(135deg,#f8faff,#eef4ff);
+    color:#536173;
+    font-size:14px;
+    line-height:1.65;
+    box-shadow:0 10px 28px rgba(15,23,42,.045);
+  }
+
+  .tabs {
+    margin:0 0 16px !important;
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:8px !important;
+    border-bottom:1px solid #edf0f4 !important;
+  }
+
+  .tabs button,
+  .tab-btn {
+    width:100% !important;
+    padding:13px 8px !important;
+    border-radius:14px 14px 0 0 !important;
+    font-size:15px !important;
+    font-weight:850 !important;
+  }
+
+  .table-head,
+  .table-header,
+  .table-header-row,
+  .token-table-head,
+  .t-head {
+    display:none !important;
+  }
+
+  #coinTable {
+    display:flex !important;
+    flex-direction:column !important;
+    gap:14px !important;
+  }
+
+  #coinTable .t-row {
+    display:grid !important;
+    grid-template-columns:34px 62px minmax(0,1fr) 68px !important;
+    grid-template-areas:
+      "rank avatar info buy"
+      "rank avatar cap buy"
+      "rank avatar meta meta" !important;
+    column-gap:12px !important;
+    row-gap:6px !important;
+    padding:18px 14px !important;
+    min-height:126px !important;
+    border-radius:20px !important;
+    border:1px solid #edf0f4 !important;
+    background:#fff !important;
+    box-shadow:0 10px 28px rgba(15,23,42,.055) !important;
+  }
+
+  #coinTable .t-row > div:nth-child(1) {
+    grid-area:rank !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    height:62px !important;
+    color:#64748b !important;
+    font-size:22px !important;
+    font-weight:900 !important;
+  }
+
+  #coinTable .t-row > div:nth-child(2),
+  #coinTable .coin-cell {
+    display:contents !important;
+  }
+
+  #coinTable .coin-avatar {
+    grid-area:avatar !important;
+    width:62px !important;
+    height:62px !important;
+    border-radius:50% !important;
+  }
+
+  #coinTable .coin-cell > div:last-child {
+    grid-area:info !important;
+    min-width:0 !important;
+    padding-top:2px !important;
+  }
+
+  .coin-info-title {
+    font-size:16px !important;
+    line-height:1.22 !important;
+    font-weight:900 !important;
+    white-space:normal !important;
+    letter-spacing:-0.02em !important;
+  }
+
+  .coin-social-box {
+    margin-top:5px !important;
+    font-size:13px !important;
+    color:#64748b !important;
+  }
+
+  #coinTable .t-row > div:nth-child(3) {
+    grid-area:cap !important;
+    display:flex !important;
+    align-items:center !important;
+  }
+
+  .change-tag {
+    font-size:15px !important;
+    font-weight:900 !important;
+  }
+
+  #coinTable .t-row > div:nth-child(4),
+  #coinTable .t-row > div:nth-child(5) {
+    display:none !important;
+  }
+
+  .mobile-token-meta {
+    grid-area:meta !important;
+    display:block !important;
+    font-size:13px !important;
+    color:#64748b !important;
+    font-weight:700 !important;
+    padding-top:2px !important;
+    white-space:nowrap !important;
+  }
+
+  #coinTable .t-row > div:nth-child(7),
+  #coinTable .buy-column-wrapper {
+    grid-area:buy !important;
+    justify-self:end !important;
+    align-self:center !important;
+  }
+
+  .btn-buy-elegant {
+    height:44px !important;
+    min-width:62px !important;
+    padding:0 16px !important;
+    border-radius:13px !important;
+    font-size:15px !important;
+    font-weight:900 !important;
+  }
+
+  footer {
+    padding:24px 18px 24px !important;
+    border-top:1px solid #edf0f4 !important;
+  }
+
+  footer > div:first-child {
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+  }
+
+  footer div[style*="text-align:center"] {
+    font-size:13px !important;
+    line-height:1.65 !important;
+  }
+}
+
+@media screen and (max-width:390px) {
+  #coinTable .t-row {
+    grid-template-columns:30px 56px minmax(0,1fr) 62px !important;
+    column-gap:10px !important;
+  }
+
+  #coinTable .coin-avatar {
+    width:56px !important;
+    height:56px !important;
+  }
+
+  .coin-info-title {
+    font-size:15px !important;
+  }
+
+  .mobile-token-meta {
+    font-size:12px !important;
+  }
+}
+</style>
+
+
+<style id="desktop-table-header-restore">
+@media screen and (min-width: 769px) {
+  .t-head {
+    display: grid !important;
+    grid-template-columns: 40px 2.8fr 1.3fr 1.1fr 1.1fr 1.1fr !important;
+    align-items: center !important;
+    padding: 14px 16px !important;
+    gap: 12px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: var(--muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.03em !important;
+    margin-bottom: 6px !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  #coinTable {
+    display: block !important;
+  }
+
+  .t-row {
+    display: grid !important;
+    grid-template-columns: 40px 2.8fr 1.3fr 1.1fr 1.1fr 1.1fr !important;
+  }
+}
+</style>
+
+
+<style id="minidex-live-skeleton-medal-v1">
+.skeleton {
+  background: linear-gradient(90deg, #eef2f7 25%, #f8fafc 50%, #eef2f7 75%);
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.25s ease-in-out infinite;
+  border-radius: 10px;
+}
+
+@keyframes skeletonPulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-row {
+  pointer-events: none !important;
+}
+
+.skeleton-rank {
+  width: 20px;
+  height: 18px;
+}
+
+.skeleton-title {
+  width: 150px;
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.skeleton-subtitle {
+  width: 90px;
+  height: 12px;
+}
+
+.skeleton-cap {
+  width: 64px;
+  height: 16px;
+}
+
+.skeleton-small {
+  width: 54px;
+  height: 16px;
+}
+
+.skeleton-button {
+  width: 54px;
+  height: 34px;
+  border-radius: 10px;
+}
+
+#zoraLiveStatus {
+  user-select: none;
+}
+
+@media screen and (max-width: 768px) {
+  #zoraLiveStatus {
+    margin: 0 0 12px 4px !important;
+    font-size: 12px !important;
+  }
+}
+</style>
+
+
+<style id="deploy-loading-ui-v1">
+.deploy-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,.45);
+  border-top-color: #fff;
+  border-radius: 999px;
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: 8px;
+  animation: deploySpin .75s linear infinite;
+}
+
+@keyframes deploySpin {
+  to { transform: rotate(360deg); }
+}
+
+#deployTokenBtn:disabled {
+  opacity: .92 !important;
+  cursor: wait !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -756,7 +1185,12 @@ body > .logo:last-of-type {
       <div>Holders</div>
       <div style="text-align: right; padding-right: 28px;">Action</div>
     </div>
-    <div id="coinTable"></div>
+    <div id="zoraLiveStatus" style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#16a34a;margin:0 0 12px 2px;">
+  <span style="width:7px;height:7px;border-radius:999px;background:#16a34a;display:inline-block;"></span>
+  LIVE Zora data
+</div>
+
+<div id="coinTable"></div>
   </div>
 </main>
 
@@ -870,6 +1304,36 @@ body > .logo:last-of-type {
   </div>
 </div>
 
+
+<div class="overlay" id="tokenSuccessModal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-head">
+      <h3>Token Successfully Created</h3>
+      <button class="close-x" onclick="closeModal('tokenSuccessModal')">✕</button>
+    </div>
+
+    <div style="font-size:14px;color:#555;line-height:1.6;margin:14px 0;">
+      <strong id="successTokenSymbol"></strong> has been successfully deployed on Base via MiniDex.
+    </div>
+
+    <div style="font-size:12px;color:#777;margin-bottom:8px;font-weight:700;text-transform:uppercase;">
+      Contract Address
+    </div>
+
+    <div id="successTokenAddress" style="font-size:12px;word-break:break-all;background:#f6f7f9;border:1px solid #e5e7eb;border-radius:10px;padding:10px;margin-bottom:16px;color:#333;"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <button class="btn btn-accent" onclick="window.open('https://zora.co/@minidex','_blank')">
+        Open Zora Profile
+      </button>
+      <button class="btn btn-success" id="openBaseScanBtn">
+        View on BaseScan
+      </button>
+    </div>
+  </div>
+</div>
+
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -908,7 +1372,7 @@ async function ensureBaseNetwork() {
       throw switchError;
     }
   } catch (err) {
-    showToast("⚠️ Gagal switch ke jaringan Base. Silakan ganti manual di wallet Anda.");
+    showToast("⚠️ Failed to switch to Base network. Please switch manually in your wallet.");
     return false;
   }
 }
@@ -931,10 +1395,16 @@ function switchFilter(type) {
 
 async function fetchCoins(){
   try{
+    const isFirstLoad = !masterCoinsList || masterCoinsList.length === 0;
+    if (isFirstLoad) renderSkeletonLoading();
+    if (isFirstLoad) updateLiveStatus("syncing");
     const res = await fetch(`${API_BASE}/api/tokens?filter=${activeFilter}`);
     masterCoinsList = await res.json();
     renderTable(masterCoinsList);
-  }catch(err){}
+    updateLiveStatus("live");
+  }catch(err){
+    updateLiveStatus("offline");
+  }
 }
 
 function handleLiveSearch() {
@@ -959,8 +1429,8 @@ function renderTable(coinsList){
     const finalMcap = typeof c.marketCap === "number" ? "$" + (c.marketCap / 1000).toFixed(0) + "k" : c.marketCap;
 
     return `
-    <div class="t-row" onclick="openTokenDetailPage('${c.address}')">
-      <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${i+1}</div>
+    <div class="t-row" data-rank="${i+1}" onclick="openTokenDetailPage('${c.address}')">
+      <div style="color:var(--muted); font-weight:600; font-size:13.5px;">${getRankDisplay(i)}</div>
       <div class="coin-cell">
         <div class="coin-avatar">
           <img
@@ -983,12 +1453,60 @@ function renderTable(coinsList){
       </div>
       <div class="num-val">${c.trades}</div>
       <div class="num-val holders-color">${c.uniqueHolders}</div>
+      <div class="mobile-token-meta">${c.trades} trades • ${c.uniqueHolders} holders</div>
       <div class="buy-column-wrapper" onclick="event.stopPropagation();">
         <button class="btn-buy-elegant" onclick="executeBuyTransaction('${c.address}', '${c.symbol}')">Buy</button>
       </div>
     </div>`;
   }).join("");
 }
+
+
+function getRankDisplay(i) {
+  if (i === 0) return "🥇";
+  if (i === 1) return "🥈";
+  if (i === 2) return "🥉";
+  return i + 1;
+}
+
+function renderSkeletonLoading() {
+  const wrap = document.getElementById("coinTable");
+  if (!wrap) return;
+
+  wrap.innerHTML = Array.from({ length: 6 }).map(() => `
+    <div class="t-row skeleton-row">
+      <div class="skeleton skeleton-rank"></div>
+      <div class="coin-cell">
+        <div class="coin-avatar skeleton"></div>
+        <div style="width:100%;">
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-subtitle"></div>
+        </div>
+      </div>
+      <div class="skeleton skeleton-cap"></div>
+      <div class="skeleton skeleton-small"></div>
+      <div class="skeleton skeleton-small"></div>
+      <div class="skeleton skeleton-button"></div>
+    </div>
+  `).join("");
+}
+
+function updateLiveStatus(state) {
+  const el = document.getElementById("zoraLiveStatus");
+  if (!el) return;
+
+  if (state === "syncing") {
+    el.innerHTML = '<span style="width:7px;height:7px;border-radius:999px;background:#f59e0b;display:inline-block;"></span> Syncing Zora data...';
+    el.style.color = "#b45309";
+  } else if (state === "offline") {
+    el.innerHTML = '<span style="width:7px;height:7px;border-radius:999px;background:#ef4444;display:inline-block;"></span> Zora data delayed';
+    el.style.color = "#dc2626";
+  } else {
+    el.innerHTML = '<span style="width:7px;height:7px;border-radius:999px;background:#16a34a;display:inline-block;"></span> LIVE Zora data';
+    el.style.color = "#16a34a";
+  }
+}
+
 
 function openTokenDetailPage(address) {
   const token = masterCoinsList.find(c => c.address === address);
@@ -1042,11 +1560,11 @@ async function submitCreateTokenRealtime(){
   const description = document.getElementById("tokenDesc").value.trim();
   const deployBtn = document.getElementById("deployTokenBtn");
 
-  if(!name || !symbol) { showToast("⚠️ Name dan Symbol wajib diisi."); return; }
+  if(!name || !symbol) { showToast("⚠️ Token name and symbol are required."); return; }
 
   deployBtn.disabled = true;
-  deployBtn.textContent = "Deploying...";
-  showToast("🚀 Sedang deploy token ke Base via MiniDex...");
+  deployBtn.innerHTML = `<span class="deploy-spinner"></span> Deploying token...`;
+  showToast("🚀 Deploying token to Base via MiniDex... Please keep this page open.");
 
   try {
     const res = await fetch(`${API_BASE}/api/create-coin-call`, {
@@ -1061,10 +1579,22 @@ async function submitCreateTokenRealtime(){
     });
 
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "Gagal deploy token.");
+    if (!res.ok) throw new Error(data.error || "Failed to deploy token.");
 
     closeModal("createTokenModal");
-    showToast(`🚀 $${symbol} berhasil di-deploy! Address: ${data.predictedCoinAddress}`);
+
+    const contractAddress =
+      data.predictedCoinAddress ||
+      data.address ||
+      data.coinAddress ||
+      data.contractAddress ||
+      data.deployedAddress ||
+      "Address unavailable";
+
+    const cleanSymbol = symbol.toUpperCase();
+
+    showToast(`🚀 $${cleanSymbol} has been successfully deployed.`);
+    showTokenSuccessModal(cleanSymbol, contractAddress);
 
     document.getElementById("tokenName").value = "";
     document.getElementById("tokenSymbol").value = "";
@@ -1078,7 +1608,7 @@ async function submitCreateTokenRealtime(){
     console.error(err);
   } finally {
     deployBtn.disabled = false;
-    deployBtn.textContent = "Deploy via Wallet Contract";
+    deployBtn.innerHTML = "Deploy via Wallet Contract";
     deployBtn.style.opacity = "1";
   }
 }
@@ -1129,7 +1659,7 @@ function calculateLiveUsdPrice(ethValue) {
 async function executeBuyTransaction(contractAddress, tokenSymbol) {
   if (!userWalletAddress || !ethersSigner) { 
     openModal('walletModal'); 
-    showToast("⚠️ Silakan hubungkan dompet Web3 Anda terlebih dahulu!");
+    showToast("⚠️ Please connect your Web3 wallet first.");
     return; 
   }
   
@@ -1168,7 +1698,7 @@ async function processFinalOnchainPurchase() {
   finalBuyBtn.textContent = "Broadcasting...";
 
   try {
-    // Memaksa wallet OKX / MetaMask beralih ke Base Network
+    // Force OKX / MetaMask wallet to switch to Base Network
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
@@ -1189,22 +1719,22 @@ async function processFinalOnchainPurchase() {
       }
     }
 
-    showToast(`🔵 Wallet Aktif: Konfirmasikan pembelian $${activeBuyTokenSymbol} sebesar ${ethInput} ETH...`);
+    showToast(`🔵 Wallet Connected: Please confirm your purchase of $${activeBuyTokenSymbol} for ${ethInput} ETH.`);
 
-    // Kirim transaksi pembelian sesuai total ETH yang diinput user ke Base blockchain
+    // Send purchase transaction with the ETH amount entered by the user to Base blockchain
     const tx = await ethersSigner.sendTransaction({
       to: activeBuyContractAddress,
       value: ethers.utils.parseEther(ethInput), // Menggunakan value dinamis sesuai ketikan user
       gasLimit: 95000
     });
 
-    showToast("⛓️ Transaksi disiarkan ke Base Blockchain! Menunggu konfirmasi block...");
+    showToast("⛓️ Transaction broadcast to Base. Waiting for block confirmation...");
     await tx.wait();
 
     closeModal("buyTokenModal");
-    showToast(`🎉 Sukses Membeli! ${ethInput} ETH dari token $${activeBuyTokenSymbol} telah masuk ke wallet Anda.`);
+    showToast(`🎉 Purchase successful! ${ethInput} ETH of $${activeBuyTokenSymbol} has been sent to your wallet.`);
   } catch (error) {
-    showToast("❌ Transaksi gagal atau dibatalkan dompet.");
+    showToast("❌ Transaction failed or was rejected by the wallet.");
     console.error(error);
   } finally {
     finalBuyBtn.disabled = false;
@@ -1215,15 +1745,26 @@ async function processFinalOnchainPurchase() {
 
 function openModal(id){ document.getElementById(id).classList.add("show"); }
 function closeModal(id){ document.getElementById(id).classList.remove("show"); }
+
+function showTokenSuccessModal(symbol, address) {
+  document.getElementById("successTokenSymbol").textContent = "$" + symbol;
+  document.getElementById("successTokenAddress").textContent = address;
+
+  const btn = document.getElementById("openBaseScanBtn");
+  btn.onclick = function () {
+    window.open("https://basescan.org/address/" + address, "_blank");
+  };
+
+  openModal("tokenSuccessModal");
+}
+
 function showToast(msg){
   const t = document.getElementById("toast"); if(!t) return;
   t.textContent = msg; t.style.display = "block"; setTimeout(()=>t.style.display = "none", 4000);
 }
 
 fetchCoins();
-setInterval(() => {
-  if(!document.getElementById("tokenSearchInput").value.trim()) fetchCoins();
-}, 4000);
+setInterval(() => { if(!document.getElementById("tokenSearchInput").value.trim()) fetchCoins(); }, 30000);
 </script>
 
 
@@ -1265,5 +1806,135 @@ setInterval(() => {
 
 
 
+
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="desktop-clean-mobile-meta-fix">
+@media screen and (min-width: 769px) {
+  .mobile-token-meta {
+    display: none !important;
+  }
+
+  .buy-column-wrapper {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+  }
+
+  .t-row {
+    grid-template-columns: 40px 2.8fr 1.3fr 1.1fr 1.1fr 1.1fr !important;
+  }
+}
+</style>
+
+<style id="desktop-grid-action-final-fix">
+@media screen and (min-width: 769px) {
+  .mobile-token-meta {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .buy-column-wrapper {
+    grid-column: 6 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+
+  .t-row > div:nth-child(6) {
+    grid-column: 6 !important;
+    grid-row: 1 !important;
+  }
+
+  .t-row {
+    grid-template-columns: 40px 2.8fr 1.3fr 1.1fr 1.1fr 1.1fr !important;
+  }
+}
+</style>
+
+<style id="minidex-ui-polish-v1">
+/* Desktop polish */
+@media screen and (min-width: 769px) {
+  .t-row {
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease !important;
+  }
+
+  .t-row:hover {
+    transform: translateY(-2px) !important;
+    border-color: rgba(0,82,255,.18) !important;
+    box-shadow: 0 10px 28px rgba(15,23,42,.06) !important;
+    background: #fff !important;
+  }
+
+  .t-row:hover .coin-avatar img {
+    transform: scale(1.06) !important;
+  }
+
+  .coin-avatar img {
+    transition: transform .2s ease !important;
+  }
+}
+
+/* Buttons polish */
+.btn,
+.btn-buy-elegant {
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease !important;
+}
+
+.btn:hover,
+.btn-buy-elegant:hover {
+  transform: translateY(-1px) !important;
+}
+
+.btn-buy-elegant:hover {
+  box-shadow: 0 8px 18px rgba(0,82,255,.12) !important;
+  border-color: rgba(0,82,255,.28) !important;
+}
+
+/* Mobile tap polish */
+@media screen and (max-width: 768px) {
+  .t-row {
+    transition: transform .14s ease, box-shadow .14s ease !important;
+  }
+
+  .t-row:active {
+    transform: scale(.985) !important;
+  }
+
+  .btn:active,
+  .btn-buy-elegant:active {
+    transform: scale(.97) !important;
+  }
+
+  .search-wrapper:focus-within {
+    border-color: rgba(0,82,255,.35) !important;
+    box-shadow: 0 0 0 4px rgba(0,82,255,.06) !important;
+  }
+}
+</style>

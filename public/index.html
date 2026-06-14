@@ -1524,11 +1524,11 @@ body > .logo:last-of-type {
         <span class="wallet-arrow">›</span>
       </button>
 
-      <button class="wallet-premium-option disabled-option" type="button">
+      <button class="wallet-premium-option" type="button" onclick="connectWalletConnect()">
         <span class="wallet-icon wallet-wc">◇</span>
         <span class="wallet-copy">
           <strong>WalletConnect</strong>
-          <small>Coming soon — connect 600+ wallets</small>
+          <small>Connect Trust Wallet, Rainbow, Rabby, and more</small>
         </span>
         <span class="wallet-arrow">›</span>
       </button>
@@ -2050,6 +2050,61 @@ setInterval(() => { if(!document.getElementById("tokenSearchInput").value.trim()
 
 
 
+
+
+<script type="module" id="walletconnect-reown-v1">
+import EthereumProvider from "https://esm.sh/@walletconnect/ethereum-provider@2.17.0";
+
+const WC_PROJECT_ID = "";
+
+window.connectWalletConnect = async function () {
+  try {
+    showToast("Opening WalletConnect...");
+
+    const wcProvider = await EthereumProvider.init({
+      projectId: WC_PROJECT_ID,
+      chains: [8453],
+      optionalChains: [8453],
+      showQrModal: true,
+      metadata: {
+        name: "MiniDex",
+        description: "Create and trade Zora tokens on Base.",
+        url: "https://minidexzora.xyz",
+        icons: ["https://minidexzora.xyz/mini-zora-logo.jpg"]
+      },
+      methods: [
+        "eth_sendTransaction",
+        "personal_sign",
+        "eth_signTypedData",
+        "eth_signTypedData_v4",
+        "wallet_switchEthereumChain",
+        "wallet_addEthereumChain"
+      ],
+      events: ["chainChanged", "accountsChanged", "disconnect"]
+    });
+
+    const accounts = await wcProvider.enable();
+    userWalletAddress = accounts[0];
+
+    ethersProvider = new ethers.providers.Web3Provider(wcProvider);
+    ethersSigner = ethersProvider.getSigner();
+
+    closeModal("walletModal");
+
+    const shortened = userWalletAddress.slice(0,6) + "..." + userWalletAddress.slice(-4);
+    const btn = document.getElementById("walletConnectBtn");
+    btn.textContent = shortened;
+    btn.style.color = "var(--green)";
+    btn.style.borderColor = "var(--green)";
+
+    showToast("✅ WalletConnect connected successfully.");
+    fetchCoins();
+  } catch (err) {
+    console.error(err);
+    showToast("❌ WalletConnect connection canceled.");
+  }
+};
+</script>
 
 </body>
 </html>

@@ -1123,48 +1123,71 @@ body > .logo:last-of-type {
 </style>
 
 
-<style id="wallet-premium-ui-v1">
+
+
+
+<style id="wallet-premium-ui-force-v2">
 .wallet-premium-modal {
-  max-width: 520px !important;
-  padding: 28px !important;
-  border-radius: 24px !important;
+  max-width: 720px !important;
+  padding: 30px !important;
+  border-radius: 28px !important;
+  background: #fff !important;
 }
 
-.wallet-premium-head {
-  align-items: flex-start !important;
-  margin-bottom: 20px !important;
+.wallet-premium-top {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 22px;
 }
 
 .wallet-mini-brand {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   font-weight: 900;
-  font-size: 13px;
+  font-size: 15px;
   color: #111;
-  letter-spacing: -0.02em;
 }
 
 .wallet-mini-brand img {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
-.wallet-premium-head h3 {
-  font-size: 28px !important;
-  line-height: 1.1 !important;
-  margin: 0 0 8px !important;
-  letter-spacing: -0.04em !important;
+.wallet-premium-top h3 {
+  font-size: 34px !important;
+  line-height: 1.05 !important;
+  margin: 0 0 10px !important;
+  letter-spacing: -0.05em !important;
+  max-width: 420px;
 }
 
-.wallet-premium-head p {
-  margin: 0;
-  color: #6b7280;
-  font-size: 14px;
-  line-height: 1.5;
-  max-width: 360px;
+.wallet-premium-top p {
+  margin: 0 0 14px;
+  color: #5f6b7a;
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 460px;
+}
+
+.wallet-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.wallet-pill-row span {
+  font-size: 12px;
+  font-weight: 800;
+  color: #334155;
+  background: #f8fafc;
+  border: 1px solid #e7ebf2;
+  padding: 7px 10px;
+  border-radius: 999px;
 }
 
 .wallet-premium-list {
@@ -1178,63 +1201,62 @@ body > .logo:last-of-type {
   border: 1px solid #e7ebf2;
   background: #fff;
   border-radius: 18px;
-  padding: 14px 14px;
+  padding: 15px;
   display: grid;
-  grid-template-columns: 46px 1fr auto 18px;
+  grid-template-columns: 50px 1fr auto 18px;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
   cursor: pointer;
   font-family: inherit;
   text-align: left;
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
+  transition: all .16s ease;
 }
 
 .wallet-premium-option:hover {
   transform: translateY(-1px);
-  border-color: rgba(0,82,255,.25);
-  box-shadow: 0 10px 24px rgba(15,23,42,.06);
+  border-color: rgba(0,82,255,.28);
+  box-shadow: 0 10px 26px rgba(15,23,42,.07);
   background: #fbfdff;
 }
 
 .wallet-premium-option.recommended {
-  border-color: rgba(0,82,255,.35);
-  box-shadow: 0 8px 22px rgba(0,82,255,.06);
+  border-color: rgba(0,82,255,.45);
+  box-shadow: 0 8px 22px rgba(0,82,255,.07);
 }
 
 .wallet-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: 14px;
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 23px;
+  font-size: 26px;
   font-weight: 900;
-  flex-shrink: 0;
 }
 
 .wallet-metamask { background: #fff4e5; }
-.wallet-coinbase { background: #eaf2ff; color: #0052ff; font-size: 28px; }
-.wallet-okx { background: #111; color: #fff; font-size: 25px; }
-.wallet-wc { background: #eef4ff; color: #0052ff; font-size: 28px; }
+.wallet-coinbase { background: #eaf2ff; color: #0052ff; font-size: 30px; }
+.wallet-okx { background: #111; color: #fff; font-size: 26px; }
+.wallet-wc { background: #eef4ff; color: #0052ff; font-size: 30px; }
 
 .wallet-copy {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   min-width: 0;
 }
 
 .wallet-copy strong {
   color: #111827;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 900;
   letter-spacing: -0.02em;
 }
 
 .wallet-copy small {
   color: #6b7280;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
 }
 
@@ -1242,15 +1264,14 @@ body > .logo:last-of-type {
   background: rgba(22,163,74,.1);
   color: #15803d;
   font-size: 11px;
-  font-weight: 800;
-  padding: 5px 8px;
+  font-weight: 900;
+  padding: 6px 9px;
   border-radius: 999px;
 }
 
 .wallet-arrow {
   color: #9ca3af;
-  font-size: 26px;
-  line-height: 1;
+  font-size: 28px;
 }
 
 .disabled-option {
@@ -1258,29 +1279,24 @@ body > .logo:last-of-type {
   cursor: not-allowed;
 }
 
-.disabled-option:hover {
-  transform: none;
-  box-shadow: none;
-}
-
 .wallet-trust-box {
   margin-top: 16px;
   border: 1px solid #e7ebf2;
-  background: #f8fafc;
-  border-radius: 16px;
-  padding: 14px;
+  background: linear-gradient(135deg,#f8faff,#f3f7ff);
+  border-radius: 18px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .wallet-trust-box strong {
-  font-size: 13px;
+  font-size: 14px;
   color: #111827;
 }
 
 .wallet-trust-box span {
-  font-size: 12px;
+  font-size: 13px;
   color: #6b7280;
   line-height: 1.45;
 }
@@ -1289,16 +1305,16 @@ body > .logo:last-of-type {
   .wallet-premium-modal {
     width: calc(100% - 28px) !important;
     padding: 24px !important;
-    border-radius: 24px !important;
+    border-radius: 26px !important;
   }
 
-  .wallet-premium-head h3 {
-    font-size: 26px !important;
+  .wallet-premium-top h3 {
+    font-size: 28px !important;
   }
 
   .wallet-premium-option {
-    grid-template-columns: 44px 1fr 18px;
-    padding: 13px;
+    grid-template-columns: 46px 1fr 18px;
+    padding: 14px;
   }
 
   .wallet-badge {
@@ -1463,14 +1479,18 @@ body > .logo:last-of-type {
 
 <div class="overlay" id="walletModal">
   <div class="modal wallet-premium-modal">
-    <div class="modal-head wallet-premium-head">
+    <div class="wallet-premium-top">
       <div>
         <div class="wallet-mini-brand">
-          <img src="/mini-zora-logo.jpg?v=900" alt="MiniDex">
+          <img src="/mini-zora-logo.jpg?v=900" alt="MINI DEX">
           <span>MINI DEX</span>
         </div>
-        <h3>Connect Wallet</h3>
-        <p>Choose a wallet to trade, create tokens, and explore Base safely.</p>
+        <h3>Connect your Web3 wallet</h3>
+        <p>Connect your wallet to trade tokens, create coins, and explore Base safely.</p>
+        <div class="wallet-pill-row">
+          <span>🔵 Built on Base</span>
+          <span>🛡️ Non-custodial</span>
+        </div>
       </div>
       <button class="close-x" onclick="closeModal('walletModal')">✕</button>
     </div>
@@ -1480,7 +1500,7 @@ body > .logo:last-of-type {
         <span class="wallet-icon wallet-metamask">🦊</span>
         <span class="wallet-copy">
           <strong>MetaMask</strong>
-          <small>Most popular Web3 wallet</small>
+          <small>The most popular Web3 wallet</small>
         </span>
         <span class="wallet-badge">Recommended</span>
         <span class="wallet-arrow">›</span>
@@ -1490,7 +1510,7 @@ body > .logo:last-of-type {
         <span class="wallet-icon wallet-coinbase">●</span>
         <span class="wallet-copy">
           <strong>Coinbase Wallet</strong>
-          <small>Official Base ecosystem wallet</small>
+          <small>Official wallet for the Base ecosystem</small>
         </span>
         <span class="wallet-arrow">›</span>
       </button>
@@ -1515,10 +1535,11 @@ body > .logo:last-of-type {
     </div>
 
     <div class="wallet-trust-box">
-      <strong>Secure & non-custodial</strong>
-      <span>MiniDex never has access to your private keys or seed phrase.</span>
+      <strong>Your security is our priority</strong>
+      <span>MiniDex never accesses your private keys or seed phrase. You stay in full control of your assets.</span>
     </div>
   </div>
+</div>
 </div>
 
 <div class="overlay" id="buyTokenModal">

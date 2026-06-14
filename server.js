@@ -141,6 +141,14 @@ app.post("/api/buy-coin-call", async (req, res) => {
 });
 
 
+
+app.get("/api/metadata/:id", (req, res) => {
+  const metadata = miniDexMetadataStore.get(req.params.id);
+  if (!metadata) return res.status(404).json({ error: "Metadata not found" });
+  res.setHeader("Content-Type", "application/json");
+  return res.json(metadata);
+});
+
 app.post("/api/create-coin-call", async (req, res) => {
   try {
     const { File } = require("node:buffer");
@@ -169,6 +177,7 @@ app.post("/api/create-coin-call", async (req, res) => {
 
     console.log(`📡 Membangun metadata + on-chain call untuk $${cleanSymbol} | deployer wallet: ${deployerAccount.address}`);
 
+    const metadataId = `${Date.now()}-${cleanSymbol.toLowerCase()}`;
     const metadata = {
       name,
       symbol: cleanSymbol,
@@ -176,9 +185,11 @@ app.post("/api/create-coin-call", async (req, res) => {
       image: "https://minidexzora.xyz/mini-zora-logo.jpg"
     };
 
-    const encodedMetadata = Buffer.from(JSON.stringify(metadata)).toString("base64");
+    miniDexMetadataStore.set(metadataId, metadata);
+
+    const publicBaseUrl = process.env.PUBLIC_BASE_URL || "https://minidexzora.xyz";
     const createMetadataParameters = {
-      uri: `data:application/json;base64,${encodedMetadata}`
+      uri: `${publicBaseUrl}/api/metadata/${metadataId}`
     };
 
     const result = await createCoinCall({
